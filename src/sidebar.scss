@@ -1,0 +1,238 @@
+@charset "utf-8";
+
+html {
+  /* line-height: 1.15; */ /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+body,
+p,
+div,
+ul,
+li,
+button,
+input,
+optgroup,
+select,
+textarea {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+div,
+a {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+a:link,
+a:visited {
+  color: inherit;
+}
+a {
+  background-color: transparent;
+  text-decoration: none;
+}
+
+img {
+  border-style: none;
+}
+
+[hidden] {
+  display: none;
+}
+body {
+  background-color: #f4f3f3;
+}
+
+/*
+
+
+*/
+
+// 常量
+$sidebar_bg_color: #fff;
+$sidebar_icon_color: #999;
+$sidebar_text_color: #666;
+$sidebar_w: 240px;
+$sidebar_s_w: 72px;
+$sidebar_logo_h: 54px;
+$sidebar_item_active_color: #e8f8fa;
+$sidebar_icon_active_color: #14b9c8;
+$sidebar_text_active_color: #14b9c8;
+$sidebar_transition: 0.2s;
+
+$sidebar_inset_zindex: 8888;
+$sidebar_zindex: 6666;
+$sidebar_ul_zindex: 8889;
+$sidebar_shade_zindex: 8887;
+
+html {
+  padding-left: $sidebar_s_w;
+  position: relative;
+}
+
+.global-sidebar_public {
+  left: 0;
+  top: 0px;
+  height: 100vh;
+}
+
+// 基础样式
+
+.global-sidebar__inset {
+  position: absolute;
+  @extend .global-sidebar_public;
+  top: 0px;
+  height: 100vh;
+  width: $sidebar_s_w;
+  z-index: sidebar_inset_zindex;
+}
+
+.global-sidebar__ul {
+  height: 100vh;
+  box-sizing: border-box;
+  padding-top: 64px;
+  overflow-y: scroll;
+  background-color: $sidebar_bg_color;
+}
+
+.global-sidebar__item {
+  height: 64px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    cursor: pointer;
+    .global-sidebar__icon {
+      color: $sidebar_icon_active_color;
+      fill: $sidebar_icon_active_color;
+    }
+    .global-sidebar__text {
+      color: $sidebar_text_active_color;
+    }
+  }
+  &.global-active {
+    .global-sidebar__icon {
+      color: $sidebar_icon_active_color;
+      fill: $sidebar_icon_active_color;
+    }
+    .global-sidebar__text {
+      color: $sidebar_text_active_color;
+    }
+  }
+}
+
+.global-sidebar__icon {
+  width: 24px;
+  height: 24px;
+  color: $sidebar_icon_color;
+  fill: $sidebar_icon_color;
+  margin-bottom: 8px;
+}
+
+.global-sidebar__text {
+  font-size: 16px;
+  color: $sidebar_text_color;
+  margin-left: 0;
+}
+
+// 嵌入式-off
+.global-sidebar__inset.sidebar-narrow {
+  width: $sidebar_s_w;
+}
+// 嵌入式-on
+.global-sidebar__inset.sidebar-wide {
+  width: $sidebar_w;
+  .global-sidebar__item {
+    height: 48px;
+    padding-left: 20px;
+    margin-bottom: 4px;
+    flex-direction: row;
+    justify-content: start;
+    &:hover {
+      background-color: $sidebar_item_active_color;
+    }
+    &.global-active {
+      background-color: $sidebar_item_active_color;
+    }
+  }
+  .global-sidebar__icon {
+    margin-bottom: 0;
+  }
+  .global-sidebar__text {
+    margin-left: 20px;
+  }
+}
+
+// 浮动式
+.global-sidebar__fixed {
+  @extend .global-sidebar_public;
+  position: fixed;
+  display: none;
+  top: 0;
+  .global-sidebar__ul {
+    transition-property: left;
+    transition-duration: $sidebar_transition;
+    position: absolute;
+    padding-top: 0;
+    top: 0;
+    left: -$sidebar_w;
+    width: $sidebar_w;
+    z-index: $sidebar_ul_zindex;
+  }
+  .global-sidebar__item {
+    height: 48px;
+    padding-left: 20px;
+    margin-bottom: 4px;
+    flex-direction: row;
+    justify-content: start;
+  }
+  .global-sidebar__icon {
+    margin-bottom: 0;
+  }
+  .global-sidebar__text {
+    margin-left: 20px;
+  }
+}
+.global-sidebar__shade {
+  transition-property: opacity;
+  transition-duration: $sidebar_transition;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+  opacity: 0;
+  z-index: $sidebar_shade_zindex;
+}
+
+.global-sidebar__logo {
+  height: $sidebar_logo_h;
+  margin-bottom: 10px;
+}
+
+// 浮动式-off
+.sidebar-hidden {
+  .global-sidebar__ul {
+    left: -$sidebar_w;
+  }
+  .global-sidebar__shade {
+    opacity: 0;
+  }
+}
+
+//浮动式-on
+.sidebar-show {
+  .global-sidebar__ul {
+    left: 0;
+  }
+  .global-sidebar__shade {
+    opacity: 1;
+  }
+}
