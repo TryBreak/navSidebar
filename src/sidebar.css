@@ -72,7 +72,7 @@ html {
   top: 0px;
   height: 100vh;
   width: 72px;
-  z-index: sidebar_inset_zindex;
+  z-index: 8888;
 }
 
 .global-sidebar__ul {

@@ -15,19 +15,32 @@
     <meta name="theme-color" content="#000000" />
     <title>侧边导航栏</title>
     <link rel="stylesheet" href="./sidebar.min.css" />
+    <style>
+      /*
+        顶栏的粗略样式
+      */
+      .global-topbar {
+        width: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 54px;
+        z-index: 9999;
+        background-color: #14b9c8;
+      }
+    </style>
   </head>
   <body>
     <img style="padding: 10px;" src="./img.png" alt="" srcset="" />
     <!--
       事实上有两个导航栏，一个是嵌入式的，一个是浮动式的
      -->
-    <div style="">
-      <button onclick="sidebar_inset_switch()">
-        嵌入式收起和展开
+
+    <div class="global-topbar">
+      <button onclick="globalSidebarSwitch()">
+        开关
       </button>
-      <button onclick="sidebar_fixed_switch()">
-        浮动式收起和展开
-      </button>
+      这里是顶栏
     </div>
 
     <div class="global-sidebar">

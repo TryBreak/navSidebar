@@ -81,26 +81,25 @@ html {
 }
 
 // 基础样式
-
 .global-sidebar__inset {
   position: fixed;
   @extend .global-sidebar_public;
   top: 0px;
   height: 100vh;
   width: $sidebar_s_w;
-  z-index: sidebar_inset_zindex;
+  z-index: $sidebar_inset_zindex;
 }
 
 .global-sidebar__ul {
   height: 100vh;
   box-sizing: border-box;
-  padding-top: 64px;
+  padding-top: $sidebar_logo_h + 10;
   overflow-y: scroll;
   background-color: $sidebar_bg_color;
 }
 
 .global-sidebar__item {
-  height: 64px;
+  height: $sidebar_logo_h + 10;
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;

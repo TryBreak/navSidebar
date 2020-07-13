@@ -1,5 +1,8 @@
 //全局存储
 var sidebar_status = "inset_switch_off";
+function globalSidebarSwitch() {
+  console.log("asasd");
+}
 
 function sidebar_inset_switch() {
   sidebarMethod("inset");
