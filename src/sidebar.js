@@ -8,8 +8,15 @@ function sidebar_fixed_switch() {
   sidebarMethod("fixed");
 }
 
-// 参数说明： inset 为控制嵌入式状态栏，回调函数为当前侧栏状态
 function sidebarMethod(status_str, callback) {
+  /*
+    @status_str:"inset" || "fixed"
+    @callback:Function({
+      fixed: Boolean,
+      inset: Boolean,
+    })
+  */
+
   var outsideStatusList = ["inset", "fixed"];
 
   // 存在对应 class 则表示是对应状态 , 默认都不存在
@@ -43,12 +50,16 @@ function sidebarMethod(status_str, callback) {
       if (status_str === outsideStatusList[1]) {
         type = outsideStatusList[1];
       }
-
       this.getElm();
+      return type;
     },
     getElm: function () {
       insetElm = document.getElementById("js-global-sidebar-inset");
       fixedElm = document.getElementById("js-global-sidebar-fixed");
+      return {
+        fixedElm: fixedElm,
+        insetElm: insetElm,
+      };
     },
     readStatus: function () {
       isInsetOff = !insetElm.classList.contains(status_list_class.inset_on);
@@ -64,18 +75,21 @@ function sidebarMethod(status_str, callback) {
       if (isFixedOff && isFixedOn) {
         isFixedOn = false;
       }
+
+      return {
+        isInsetOn: isInsetOn,
+        isFixedOn: isFixedOn,
+      };
     },
     inset_off: function () {
       insetElm.classList.remove(status_list_class.inset_on);
       insetElm.classList.add(status_list_class.inset_off);
-      inform();
+      return inform();
     },
     inset_on: function () {
-      console.log("开启");
-
       insetElm.classList.remove(status_list_class.inset_off);
       insetElm.classList.add(status_list_class.inset_on);
-      inform();
+      return inform();
     },
     fixed_off: function () {
       fixedElm.classList.remove(status_list_class.fixed_on);
@@ -84,6 +98,7 @@ function sidebarMethod(status_str, callback) {
         fixedElm.style.display = "none";
         inform();
       }, transitionTime);
+      return "fixed_off";
     },
     fixed_on: function () {
       fixedElm.style.display = "block";
@@ -92,14 +107,17 @@ function sidebarMethod(status_str, callback) {
         fixedElm.classList.add(status_list_class.fixed_on);
         inform();
       });
+      return "fixed_on";
     },
     htmlOn: function () {
       var htmlElm = document.getElementsByTagName("html")[0];
       htmlElm.style.paddingLeft = sidebar_w + "px";
+      return htmlElm.style.paddingLeft;
     },
     htmlOff: function () {
       var htmlElm = document.getElementsByTagName("html")[0];
       htmlElm.style.paddingLeft = sidebar_s_w + "px";
+      return htmlElm.style.paddingLeft;
     },
   };
 
@@ -129,14 +147,17 @@ function sidebarMethod(status_str, callback) {
     }
   }
 
+  return utils;
+
   //通知
   function inform() {
     //读取当前状态并输出
     utils.readStatus();
-    callback &&
-      callback({
-        fixed: isFixedOn,
-        inset: isInsetOn,
-      });
+    var param = {
+      fixed: isFixedOn,
+      inset: isInsetOn,
+    };
+    callback && callback(param);
+    return param;
   }
 }
