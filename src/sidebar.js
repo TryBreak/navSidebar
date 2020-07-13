@@ -8,10 +8,11 @@ function sidebar_fixed_switch() {
   sidebarMethod("fixed");
 }
 
-function sidebarMethod(status_str) {
+// 参数说明： inset 为控制嵌入式状态栏，回调函数为当前侧栏状态
+function sidebarMethod(status_str, callback) {
   var outsideStatusList = ["inset", "fixed"];
 
-  // 存在对应 class 则表示是对应状态
+  // 存在对应 class 则表示是对应状态 , 默认都不存在
   var status_list_class = {
     inset_off: "sidebar-narrow",
     inset_on: "sidebar-wide",
@@ -38,9 +39,11 @@ function sidebarMethod(status_str) {
     readType: function (params) {
       if (status_str === outsideStatusList[0]) {
         type = outsideStatusList[0];
-      } else {
+      }
+      if (status_str === outsideStatusList[1]) {
         type = outsideStatusList[1];
       }
+
       this.getElm();
     },
     getElm: function () {
@@ -50,9 +53,17 @@ function sidebarMethod(status_str) {
     readStatus: function () {
       isInsetOff = !insetElm.classList.contains(status_list_class.inset_on);
       isInsetOn = !insetElm.classList.contains(status_list_class.inset_off);
+      //嵌入式默认为关闭状态
+      if (isInsetOff && isInsetOn) {
+        isInsetOn = false;
+      }
 
       isFixedOff = !fixedElm.classList.contains(status_list_class.fixed_on);
       isFixedOn = !fixedElm.classList.contains(status_list_class.fixed_off);
+      //浮动式默认为关闭状态
+      if (isFixedOff && isFixedOn) {
+        isFixedOn = false;
+      }
     },
     inset_off: function () {
       insetElm.classList.remove(status_list_class.inset_on);
@@ -100,7 +111,7 @@ function sidebarMethod(status_str) {
 
   // 执行切换
 
-  if (status_str === "inset") {
+  if (type === outsideStatusList[0]) {
     if (isInsetOff) {
       utils.inset_on();
       utils.htmlOn();
@@ -110,7 +121,7 @@ function sidebarMethod(status_str) {
     }
   }
 
-  if (status_str === "fixed") {
+  if (type === outsideStatusList[1]) {
     if (isFixedOff) {
       utils.fixed_on();
     } else {
@@ -122,9 +133,10 @@ function sidebarMethod(status_str) {
   function inform() {
     //读取当前状态并输出
     utils.readStatus();
-    console.log({
-      fixed: isFixedOn,
-      inset: isInsetOn,
-    });
+    callback &&
+      callback({
+        fixed: isFixedOn,
+        inset: isInsetOn,
+      });
   }
 }

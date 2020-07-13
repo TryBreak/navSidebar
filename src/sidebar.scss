@@ -83,7 +83,7 @@ html {
 // 基础样式
 
 .global-sidebar__inset {
-  position: absolute;
+  position: fixed;
   @extend .global-sidebar_public;
   top: 0px;
   height: 100vh;
