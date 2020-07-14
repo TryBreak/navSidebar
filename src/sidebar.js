@@ -2,13 +2,17 @@
 var sidebar_status = "inset_switch_off";
 function globalSidebarSwitch() {
   console.log("asasd");
-}
+  var winW = document.body.clientWidth;
+  var window_w = 1320; //宽窄模式自动切换临界点
+  if (winW - window_w > 0) {
+    sidebarMethod("inset");
+  } else {
+    sidebarMethod("fixed");
+  }
 
-function sidebar_inset_switch() {
-  sidebarMethod("inset");
-}
-function sidebar_fixed_switch() {
-  sidebarMethod("fixed");
+  // 默认嵌入式展开收起
+  // 如果宽度小于 1320 , 则默认为浮动式
+  // 如果不存在嵌入式，则为浮动式展开收起
 }
 
 function sidebarMethod(status_str, callback) {
@@ -113,12 +117,12 @@ function sidebarMethod(status_str, callback) {
       return "fixed_on";
     },
     htmlOn: function () {
-      var htmlElm = document.getElementsByTagName("html")[0];
+      var htmlElm = document.getElementsByTagName("body")[0];
       htmlElm.style.paddingLeft = sidebar_w + "px";
       return htmlElm.style.paddingLeft;
     },
     htmlOff: function () {
-      var htmlElm = document.getElementsByTagName("html")[0];
+      var htmlElm = document.getElementsByTagName("body")[0];
       htmlElm.style.paddingLeft = sidebar_s_w + "px";
       return htmlElm.style.paddingLeft;
     },

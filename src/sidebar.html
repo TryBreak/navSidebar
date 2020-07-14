@@ -25,7 +25,7 @@
         left: 0;
         top: 0;
         height: 54px;
-        z-index: 9999;
+        z-index: 7000;
         background-color: #14b9c8;
       }
     </style>
@@ -76,11 +76,11 @@
       <div class="global-sidebar__fixed" id="js-global-sidebar-fixed">
         <div
           class="global-sidebar__shade"
-          onclick="sidebar_fixed_switch()"
+          onclick="sidebarMethod('fixed')"
         ></div>
         <ul class="global-sidebar__ul">
           <li class="global-sidebar__logo">
-            <button onclick="sidebar_fixed_switch()">
+            <button onclick="sidebarMethod('fixed')">
               收起/展开
             </button>
           </li>

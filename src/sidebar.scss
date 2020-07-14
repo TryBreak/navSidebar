@@ -64,12 +64,13 @@ $sidebar_icon_active_color: #14b9c8;
 $sidebar_text_active_color: #14b9c8;
 $sidebar_transition: 0.2s;
 
-$sidebar_inset_zindex: 8888;
-$sidebar_zindex: 6666;
-$sidebar_ul_zindex: 8889;
-$sidebar_shade_zindex: 8887;
+//假设顶栏层级为 7000
+$sidebar_inset_zindex: 6999; // 嵌入式为
+$sidebar_fixed_zindex: 7001;
+$sidebar_ul_zindex: 7002;
+$sidebar_shade_zindex: 7001;
 
-html {
+body {
   padding-left: $sidebar_s_w;
   position: relative;
 }
@@ -174,6 +175,7 @@ html {
   position: fixed;
   display: none;
   top: 0;
+  z-index: $sidebar_fixed_zindex;
   .global-sidebar__ul {
     transition-property: left;
     transition-duration: $sidebar_transition;

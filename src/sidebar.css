@@ -56,7 +56,7 @@ body {
 
 
 */
-html {
+body {
   padding-left: 72px;
   position: relative;
 }
@@ -72,7 +72,7 @@ html {
   top: 0px;
   height: 100vh;
   width: 72px;
-  z-index: 8888;
+  z-index: 6999;
 }
 
 .global-sidebar__ul {
@@ -164,6 +164,7 @@ html {
   position: fixed;
   display: none;
   top: 0;
+  z-index: 7001;
 }
 
 .global-sidebar__fixed .global-sidebar__ul {
@@ -174,7 +175,7 @@ html {
   top: 0;
   left: -240px;
   width: 240px;
-  z-index: 8889;
+  z-index: 7002;
 }
 
 .global-sidebar__fixed .global-sidebar__item {
@@ -203,7 +204,7 @@ html {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.3);
   opacity: 0;
-  z-index: 8887;
+  z-index: 7001;
 }
 
 .global-sidebar__logo {
