@@ -1,5 +1,3 @@
-//全局存储
-var sidebar_status = "inset_switch_off";
 function globalSidebarSwitch() {
   var winW = document.body.clientWidth;
   var window_w = 1320; //宽窄模式自动切换临界点
@@ -19,11 +17,6 @@ function sidebarInitialize() {
     var winW = document.body.clientWidth;
     var window_w = 1320; //宽窄模式自动切换临界点
     var method = sidebarMethod(null);
-    var isInsetOn = method.readStatus();
-    if (isInsetOn) {
-      return;
-    }
-
     if (winW - window_w > 0) {
       method.inset_on();
       method.htmlOn();
@@ -101,7 +94,6 @@ function sidebarMethod(status_str, callback) {
         if (isInsetOff && isInsetOn) {
           isInsetOn = false;
         }
-        // isInsetDisabled = insetElm.style.display;
       }
 
       isFixedOff = !fixedElm.classList.contains(status_list_class.fixed_on);
