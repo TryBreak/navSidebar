@@ -1,7 +1,6 @@
 //全局存储
 var sidebar_status = "inset_switch_off";
 function globalSidebarSwitch() {
-  console.log("asasd");
   var winW = document.body.clientWidth;
   var window_w = 1320; //宽窄模式自动切换临界点
   if (winW - window_w > 0) {
@@ -65,8 +64,8 @@ function sidebarMethod(status_str, callback) {
     getElm: function () {
       insetElm = document.getElementById("js-global-sidebar-inset");
       fixedElm = document.getElementById("js-global-sidebar-fixed");
-      var boxElm = document.getElementById("js-global-sidebar");
-      isInsetDisabled = boxElm.hasAttribute("disabled");
+      insetElmStyle = window.getComputedStyle(insetElm);
+      isInsetDisabled = insetElmStyle.display === "none";
 
       return {
         fixedElm: fixedElm,
@@ -81,6 +80,7 @@ function sidebarMethod(status_str, callback) {
         if (isInsetOff && isInsetOn) {
           isInsetOn = false;
         }
+        // isInsetDisabled = insetElm.style.display;
       }
 
       isFixedOff = !fixedElm.classList.contains(status_list_class.fixed_on);

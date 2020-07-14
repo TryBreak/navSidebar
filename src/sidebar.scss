@@ -79,12 +79,15 @@ $sidebar_shade_zindex: 7001;
 // 基础样式
 .global-sidebar__inset {
   position: fixed;
+  display: block;
   @extend .global-sidebar_public;
   top: 0px;
   height: 100vh;
   width: $sidebar_s_w;
   z-index: $sidebar_inset_zindex;
 }
+
+//隐藏显示逻辑
 .global-sidebar[disabled] {
   .global-sidebar__inset {
     display: none;
@@ -252,3 +255,4 @@ $sidebar_shade_zindex: 7001;
     opacity: 1;
   }
 }
+//媒体查询，做css层面的
