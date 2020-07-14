@@ -63,6 +63,8 @@ $sidebar_item_active_color: #e8f8fa;
 $sidebar_icon_active_color: #14b9c8;
 $sidebar_text_active_color: #14b9c8;
 $sidebar_transition: 0.2s;
+$narrow_w: 1320px;
+$hidden_w: 800px;
 
 //假设顶栏层级为 7000
 $sidebar_inset_zindex: 6999; // 嵌入式为
@@ -85,22 +87,6 @@ $sidebar_shade_zindex: 7001;
   height: 100vh;
   width: $sidebar_s_w;
   z-index: $sidebar_inset_zindex;
-}
-
-//隐藏显示逻辑
-.global-sidebar[disabled] {
-  .global-sidebar__inset {
-    display: none;
-  }
-  & + .global-main {
-    padding-left: 0;
-  }
-}
-
-.global-sidebar {
-  & + .global-main {
-    padding-left: $sidebar_s_w;
-  }
 }
 
 .global-sidebar__ul {
@@ -255,4 +241,36 @@ $sidebar_shade_zindex: 7001;
     opacity: 1;
   }
 }
-//媒体查询，做css层面的
+
+// disabled 隐藏显示逻辑
+.global-sidebar[disabled] {
+  .global-sidebar__inset {
+    display: none;
+  }
+  & + .global-main {
+    padding-left: 0;
+  }
+}
+
+.global-sidebar {
+  & + .global-main {
+    padding-left: $sidebar_s_w;
+  }
+}
+
+//媒体查询，宽度过小则自动隐藏
+@media (max-width: $narrow_w) {
+  .global-sidebar__inset {
+    width: $sidebar_s_w;
+  }
+}
+@media (max-width: $hidden_w) {
+  .global-sidebar {
+    .global-sidebar__inset {
+      display: none;
+    }
+    & + .global-main {
+      padding-left: 0;
+    }
+  }
+}

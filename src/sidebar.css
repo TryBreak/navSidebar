@@ -71,18 +71,6 @@ body {
   z-index: 6999;
 }
 
-.global-sidebar[disabled] .global-sidebar__inset {
-  display: none;
-}
-
-.global-sidebar[disabled] + .global-main {
-  padding-left: 0;
-}
-
-.global-sidebar + .global-main {
-  padding-left: 72px;
-}
-
 .global-sidebar__ul {
   height: 100vh;
   box-sizing: border-box;
@@ -242,4 +230,31 @@ body {
 
 .sidebar-show .global-sidebar__shade {
   opacity: 1;
+}
+
+.global-sidebar[disabled] .global-sidebar__inset {
+  display: none;
+}
+
+.global-sidebar[disabled] + .global-main {
+  padding-left: 0;
+}
+
+.global-sidebar + .global-main {
+  padding-left: 72px;
+}
+
+@media (max-width: 1320px) {
+  .global-sidebar__inset {
+    width: 72px;
+  }
+}
+
+@media (max-width: 800px) {
+  .global-sidebar .global-sidebar__inset {
+    display: none;
+  }
+  .global-sidebar + .global-main {
+    padding-left: 0;
+  }
 }

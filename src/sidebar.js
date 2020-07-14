@@ -13,7 +13,28 @@ function globalSidebarSwitch() {
   // 如果不存在嵌入式，则为浮动式展开收起
 }
 
-function sidebarInitialize() {}
+sidebarInitialize();
+function sidebarInitialize() {
+  var sidebarInitialize_main = function main() {
+    var winW = document.body.clientWidth;
+    var window_w = 1320; //宽窄模式自动切换临界点
+    var method = sidebarMethod(null);
+    var isInsetOn = method.readStatus();
+    if (isInsetOn) {
+      return;
+    }
+
+    if (winW - window_w > 0) {
+      method.inset_on();
+      method.htmlOn();
+    } else {
+      method.inset_off();
+      method.htmlOff();
+    }
+  };
+  sidebarInitialize_main();
+  window.onresize = sidebarInitialize_main;
+}
 
 function sidebarMethod(status_str, callback) {
   /*
