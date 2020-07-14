@@ -89,6 +89,15 @@ $sidebar_shade_zindex: 7001;
   .global-sidebar__inset {
     display: none;
   }
+  & + .global-main {
+    padding-left: 0;
+  }
+}
+
+.global-sidebar {
+  & + .global-main {
+    padding-left: $sidebar_s_w;
+  }
 }
 
 .global-sidebar__ul {

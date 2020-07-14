@@ -74,6 +74,14 @@ body {
   display: none;
 }
 
+.global-sidebar[disabled] + .global-main {
+  padding-left: 0;
+}
+
+.global-sidebar + .global-main {
+  padding-left: 72px;
+}
+
 .global-sidebar__ul {
   height: 100vh;
   box-sizing: border-box;
