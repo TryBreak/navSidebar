@@ -15,6 +15,8 @@ function globalSidebarSwitch() {
   // 如果不存在嵌入式，则为浮动式展开收起
 }
 
+function sidebarInitialize() {}
+
 function sidebarMethod(status_str, callback) {
   /*
     @status_str:"inset" || "fixed"
@@ -39,8 +41,8 @@ function sidebarMethod(status_str, callback) {
   var sidebar_s_w = 72;
 
   var type;
-  var fixedElm;
-  var insetElm;
+  var fixedElm = null;
+  var insetElm = null;
   var isInsetOff;
   var isInsetOn;
   var isFixedOff;
@@ -69,11 +71,13 @@ function sidebarMethod(status_str, callback) {
       };
     },
     readStatus: function () {
-      isInsetOff = !insetElm.classList.contains(status_list_class.inset_on);
-      isInsetOn = !insetElm.classList.contains(status_list_class.inset_off);
-      //嵌入式默认为关闭状态
-      if (isInsetOff && isInsetOn) {
-        isInsetOn = false;
+      if (insetElm) {
+        isInsetOff = !insetElm.classList.contains(status_list_class.inset_on);
+        isInsetOn = !insetElm.classList.contains(status_list_class.inset_off);
+        //嵌入式默认为关闭状态
+        if (isInsetOff && isInsetOn) {
+          isInsetOn = false;
+        }
       }
 
       isFixedOff = !fixedElm.classList.contains(status_list_class.fixed_on);
@@ -89,11 +93,17 @@ function sidebarMethod(status_str, callback) {
       };
     },
     inset_off: function () {
+      if (!insetElm) {
+        return null;
+      }
       insetElm.classList.remove(status_list_class.inset_on);
       insetElm.classList.add(status_list_class.inset_off);
       return inform();
     },
     inset_on: function () {
+      if (!insetElm) {
+        return null;
+      }
       insetElm.classList.remove(status_list_class.inset_off);
       insetElm.classList.add(status_list_class.inset_on);
       return inform();
@@ -117,12 +127,12 @@ function sidebarMethod(status_str, callback) {
       return "fixed_on";
     },
     htmlOn: function () {
-      var htmlElm = document.getElementsByTagName("body")[0];
+      var htmlElm = document.getElementById("global-main");
       htmlElm.style.paddingLeft = sidebar_w + "px";
       return htmlElm.style.paddingLeft;
     },
     htmlOff: function () {
-      var htmlElm = document.getElementsByTagName("body")[0];
+      var htmlElm = document.getElementById("global-main");
       htmlElm.style.paddingLeft = sidebar_s_w + "px";
       return htmlElm.style.paddingLeft;
     },

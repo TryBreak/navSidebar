@@ -70,11 +70,6 @@ $sidebar_fixed_zindex: 7001;
 $sidebar_ul_zindex: 7002;
 $sidebar_shade_zindex: 7001;
 
-body {
-  padding-left: $sidebar_s_w;
-  position: relative;
-}
-
 .global-sidebar_public {
   left: 0;
   top: 0px;
@@ -89,6 +84,11 @@ body {
   height: 100vh;
   width: $sidebar_s_w;
   z-index: $sidebar_inset_zindex;
+}
+.global-sidebar[disabled] {
+  .global-sidebar__inset {
+    display: none;
+  }
 }
 
 .global-sidebar__ul {

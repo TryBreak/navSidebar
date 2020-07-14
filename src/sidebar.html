@@ -31,19 +31,13 @@
     </style>
   </head>
   <body>
-    <img style="padding: 10px;" src="./img.png" alt="" srcset="" />
-    <!--
-      事实上有两个导航栏，一个是嵌入式的，一个是浮动式的
-     -->
-
     <div class="global-topbar">
       <button onclick="globalSidebarSwitch()">
         开关
       </button>
       这里是顶栏
     </div>
-
-    <div class="global-sidebar">
+    <div class="global-sidebar" disabled>
       <div class="global-sidebar__inset" id="js-global-sidebar-inset">
         <ul class="global-sidebar__ul">
           <li class="global-sidebar__item global-active">
@@ -110,6 +104,9 @@
           </li>
         </ul>
       </div>
+    </div>
+    <div class="global-main" id="global-main">
+      <img style="padding: 10px;" src="./img.png" alt="" srcset="" />
     </div>
   </body>
 </html>

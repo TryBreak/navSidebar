@@ -56,11 +56,6 @@ body {
 
 
 */
-body {
-  padding-left: 72px;
-  position: relative;
-}
-
 .global-sidebar_public, .global-sidebar__inset, .global-sidebar__fixed {
   left: 0;
   top: 0px;
@@ -73,6 +68,10 @@ body {
   height: 100vh;
   width: 72px;
   z-index: 6999;
+}
+
+.global-sidebar[disabled] .global-sidebar__inset {
+  display: none;
 }
 
 .global-sidebar__ul {
