@@ -1,8 +1,14 @@
+//本次切换状态存储：
+var global_sidebar_inset = true; //true 为展开 ，false 为关闭
+
 function globalSidebarSwitch() {
   var winW = document.body.clientWidth;
   var window_w = 1320; //宽窄模式自动切换临界点
   if (winW - window_w > 0) {
-    sidebarMethod("inset");
+    sidebarMethod("inset", function (param) {
+      console.log(param.inset);
+      global_sidebar_inset = param.inset;
+    });
   } else {
     sidebarMethod("fixed");
   }
@@ -17,6 +23,9 @@ function sidebarInitialize() {
     var winW = document.body.clientWidth;
     var window_w = 1320; //宽窄模式自动切换临界点
     var method = sidebarMethod(null);
+    if (!global_sidebar_inset) {
+      return;
+    }
     if (winW - window_w > 0) {
       method.inset_on();
       method.htmlOn();
