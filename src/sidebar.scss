@@ -192,6 +192,12 @@ $sidebar_shade_zindex: 7001;
     margin-bottom: 4px;
     flex-direction: row;
     justify-content: start;
+    &:hover {
+      background-color: $sidebar_item_active_color;
+    }
+    &.global-active {
+      background-color: $sidebar_item_active_color;
+    }
   }
   .global-sidebar__icon {
     margin-bottom: 0;

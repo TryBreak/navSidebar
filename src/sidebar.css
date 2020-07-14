@@ -185,6 +185,14 @@ body {
   justify-content: start;
 }
 
+.global-sidebar__fixed .global-sidebar__item:hover {
+  background-color: #e8f8fa;
+}
+
+.global-sidebar__fixed .global-sidebar__item.global-active {
+  background-color: #e8f8fa;
+}
+
 .global-sidebar__fixed .global-sidebar__icon {
   margin-bottom: 0;
 }

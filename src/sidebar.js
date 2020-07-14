@@ -9,7 +9,6 @@ function globalSidebarSwitch() {
   } else {
     sidebarMethod("fixed");
   }
-
   // 默认嵌入式展开收起
   // 如果宽度小于 1320 , 则默认为浮动式
   // 如果不存在嵌入式，则为浮动式展开收起
@@ -45,6 +44,7 @@ function sidebarMethod(status_str, callback) {
   var insetElm = null;
   var isInsetOff;
   var isInsetOn;
+  var isInsetDisabled;
   var isFixedOff;
   var isFixedOn;
 
@@ -65,6 +65,9 @@ function sidebarMethod(status_str, callback) {
     getElm: function () {
       insetElm = document.getElementById("js-global-sidebar-inset");
       fixedElm = document.getElementById("js-global-sidebar-fixed");
+      var boxElm = document.getElementById("js-global-sidebar");
+      isInsetDisabled = boxElm.hasAttribute("disabled");
+
       return {
         fixedElm: fixedElm,
         insetElm: insetElm,
@@ -145,6 +148,9 @@ function sidebarMethod(status_str, callback) {
   utils.readStatus();
 
   // 执行切换
+  if (isInsetDisabled) {
+    type = outsideStatusList[1];
+  }
 
   if (type === outsideStatusList[0]) {
     if (isInsetOff) {
