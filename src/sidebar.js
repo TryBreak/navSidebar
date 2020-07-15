@@ -6,7 +6,6 @@ function globalSidebarSwitch() {
   var window_w = 1320; //宽窄模式自动切换临界点
   if (winW - window_w > 0) {
     sidebarMethod("inset", function (param) {
-      console.log(param.inset);
       global_sidebar_inset = param.inset;
     });
   } else {
