@@ -1,7 +1,7 @@
 //本次切换状态存储：
-window.global_sidebar_inset = true; //true 为展开 ，false 为关闭
+window.global_navSidebar_inset = true; //true 为展开 ，false 为关闭
 
-function sidebarMethod(status_str, callback) {
+function navSidebarMethod(status_str, callback) {
   /*
     @status_str:"inset" || "fixed"
     @callback:Function({
@@ -14,15 +14,15 @@ function sidebarMethod(status_str, callback) {
 
   // 存在对应 class 则表示是对应状态 , 默认都不存在
   var status_list_class = {
-    inset_off: "sidebar-narrow",
-    inset_on: "sidebar-wide",
-    fixed_off: "sidebar-hidden",
-    fixed_on: "sidebar-show",
+    inset_off: "nav_sidebar-narrow",
+    inset_on: "nav_sidebar-wide",
+    fixed_off: "nav_sidebar-hidden",
+    fixed_on: "nav_sidebar-show",
   };
 
   var transitionTime = 200;
-  var sidebar_w = 240;
-  var sidebar_s_w = 72;
+  var navSidebar_w = 240;
+  var navSidebar_s_w = 72;
 
   var type;
   var fixedElm = null;
@@ -48,8 +48,8 @@ function sidebarMethod(status_str, callback) {
       return type;
     },
     getElm: function () {
-      insetElm = document.getElementById("js-global-sidebar-inset");
-      fixedElm = document.getElementById("js-global-sidebar-fixed");
+      insetElm = document.getElementById("js-nav-navSidebar-inset");
+      fixedElm = document.getElementById("js-nav-navSidebar-fixed");
       insetElmStyle = window.getComputedStyle(insetElm);
       isInsetDisabled = insetElmStyle.display === "none";
 
@@ -116,12 +116,12 @@ function sidebarMethod(status_str, callback) {
     },
     htmlOn: function () {
       var htmlElm = document.getElementById("global-main");
-      htmlElm.style.paddingLeft = sidebar_w + "px";
+      htmlElm.style.paddingLeft = navSidebar_w + "px";
       return htmlElm.style.paddingLeft;
     },
     htmlOff: function () {
       var htmlElm = document.getElementById("global-main");
-      htmlElm.style.paddingLeft = sidebar_s_w + "px";
+      htmlElm.style.paddingLeft = navSidebar_s_w + "px";
       return htmlElm.style.paddingLeft;
     },
   };
@@ -170,15 +170,15 @@ function sidebarMethod(status_str, callback) {
   }
 }
 
-function globalSidebarSwitch() {
+function globalnavSidebarSwitch() {
   var winW = document.body.clientWidth;
   var window_w = 1320; //宽窄模式自动切换临界点
   if (winW - window_w > 0) {
-    sidebarMethod("inset", function (param) {
-      global_sidebar_inset = param.inset;
+    navSidebarMethod("inset", function (param) {
+      global_navSidebar_inset = param.inset;
     });
   } else {
-    sidebarMethod("fixed");
+    navSidebarMethod("fixed");
   }
   // 默认嵌入式展开收起
   // 如果宽度小于 1320 , 则默认为浮动式
@@ -186,13 +186,13 @@ function globalSidebarSwitch() {
 }
 
 // $(function(){
-sidebarInitialize();
-function sidebarInitialize() {
-  var sidebarInitialize_main = function main() {
+navSidebarInitialize();
+function navSidebarInitialize() {
+  var navSidebarInitialize_main = function main() {
     var winW = document.body.clientWidth;
     var window_w = 1320; //宽窄模式自动切换临界点
-    var method = sidebarMethod(null);
-    if (!global_sidebar_inset) {
+    var method = navSidebarMethod(null);
+    if (!global_navSidebar_inset) {
       return;
     }
     if (winW - window_w > 0) {
@@ -203,7 +203,7 @@ function sidebarInitialize() {
       method.htmlOff();
     }
   };
-  sidebarInitialize_main();
-  window.onresize = sidebarInitialize_main;
+  navSidebarInitialize_main();
+  window.onresize = navSidebarInitialize_main;
 }
 // })

@@ -1,5 +1,7 @@
 @charset "utf-8";
-
+/*
+reset
+*/
 html {
   /* line-height: 1.15; */ /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -48,58 +50,52 @@ body {
 }
 
 /*
-
-
+start
 */
 
 // 常量
-$sidebar_bg_color: #fff;
-$sidebar_icon_color: #999;
-$sidebar_text_color: #666;
-$sidebar_w: 240px;
-$sidebar_s_w: 72px;
-$sidebar_logo_h: 54px;
-$sidebar_item_active_color: #e8f8fa;
-$sidebar_icon_active_color: #14b9c8;
-$sidebar_text_active_color: #14b9c8;
-$sidebar_transition: 0.2s;
+$navSidebar_bg_color: #fff;
+$navSidebar_icon_color: #999;
+$navSidebar_text_color: #666;
+$navSidebar_w: 240px;
+$navSidebar_s_w: 72px;
+$navSidebar_logo_h: 54px;
+$navSidebar_item_active_color: #e8f8fa;
+$navSidebar_icon_active_color: #14b9c8;
+$navSidebar_text_active_color: #14b9c8;
+$navSidebar_transition: 0.2s;
 $narrow_w: 1320px;
 $hidden_w: 800px;
 
 //假设顶栏层级为 t = 7000 变量为 $zIndex-navbar--fixed
-$zIndex-navbar--fixed: 300;
-$sidebar_inset_zindex: $zIndex-navbar--fixed - 1; // 嵌入式为 t - 1
-$sidebar_fixed_zindex: $zIndex-navbar--fixed + 1; // 浮动式为 t + 1
-$sidebar_ul_zindex: 2; // 内容为 t + 2
-$sidebar_shade_zindex: 1; // 内容为 t + 1
+$zIndex-navbar--fixed: 300; // 顶栏的层级
 
-.global-sidebar_public {
-  left: 0;
-  top: 0px;
-  height: 100vh;
-}
+$navSidebar_inset_zIndex: $zIndex-navbar--fixed - 1; // 嵌入式为 t - 1
+$navSidebar_fixed_zIndex: $zIndex-navbar--fixed + 1; // 浮动式为 t + 1
+$navSidebar_ul_zIndex: 2; // 内容为 t + 2
+$navSidebar_shade_zIndex: 1; // 内容为 t + 1
 
 // 基础样式
-.global-sidebar__inset {
+.nav-sidebar__inset {
   position: fixed;
   display: block;
-  @extend .global-sidebar_public;
   top: 0px;
+  left: 0px;
   height: 100vh;
-  width: $sidebar_s_w;
-  z-index: $sidebar_inset_zindex;
+  width: $navSidebar_s_w;
+  z-index: $navSidebar_inset_zIndex;
 }
 
-.global-sidebar__ul {
+.nav-sidebar__ul {
   height: 100vh;
   box-sizing: border-box;
-  padding-top: $sidebar_logo_h + 10;
+  padding-top: $navSidebar_logo_h + 10;
   overflow-y: scroll;
-  background-color: $sidebar_bg_color;
+  background-color: $navSidebar_bg_color;
 }
 
-.global-sidebar__item {
-  height: $sidebar_logo_h + 10;
+.nav-sidebar__item {
+  height: $navSidebar_logo_h + 10;
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
@@ -109,110 +105,109 @@ $sidebar_shade_zindex: 1; // 内容为 t + 1
   &:hover {
     text-decoration: none;
     cursor: pointer;
-    .global-sidebar__icon {
-      color: $sidebar_icon_active_color;
-      fill: $sidebar_icon_active_color;
+    .nav-sidebar__icon {
+      color: $navSidebar_icon_active_color;
+      fill: $navSidebar_icon_active_color;
     }
-    .global-sidebar__text {
-      color: $sidebar_text_active_color;
+    .nav-sidebar__title {
+      color: $navSidebar_text_active_color;
     }
   }
-  &.global-active {
-    .global-sidebar__icon {
-      color: $sidebar_icon_active_color;
-      fill: $sidebar_icon_active_color;
+  &.nav-sidebar__item-active {
+    .nav-sidebar__icon {
+      color: $navSidebar_icon_active_color;
+      fill: $navSidebar_icon_active_color;
     }
-    .global-sidebar__text {
-      color: $sidebar_text_active_color;
+    .nav-sidebar__title {
+      color: $navSidebar_text_active_color;
     }
   }
 }
 
-.global-sidebar__icon {
+.nav-sidebar__icon {
   width: 24px;
   height: 24px;
   text-align: center;
   line-height: 24px;
-  color: $sidebar_icon_color;
-  fill: $sidebar_icon_color;
+  color: $navSidebar_icon_color;
+  fill: $navSidebar_icon_color;
   margin-bottom: 8px;
   font-size: 24px !important;
 }
 
-.global-sidebar__text {
+.nav-sidebar__title {
   font-size: 16px;
-  color: $sidebar_text_color;
+  color: $navSidebar_text_color;
   margin-left: 0;
 }
 
 // 嵌入式-off
-.global-sidebar__inset.sidebar-narrow {
-  width: $sidebar_s_w;
+.nav-sidebar__inset.nav_sidebar-narrow {
+  width: $navSidebar_s_w;
 }
 // 嵌入式-on
-.global-sidebar__inset.sidebar-wide {
-  width: $sidebar_w;
-  .global-sidebar__item {
+.nav-sidebar__inset.nav_sidebar-narrow {
+  width: $navSidebar_w;
+  .nav-sidebar__item {
     height: 48px;
     padding-left: 20px;
     margin-bottom: 4px;
     flex-direction: row;
     justify-content: start;
     &:hover {
-      background-color: $sidebar_item_active_color;
+      background-color: $navSidebar_item_active_color;
     }
     &.global-active {
-      background-color: $sidebar_item_active_color;
+      background-color: $navSidebar_item_active_color;
     }
   }
-  .global-sidebar__icon {
+  .nav-sidebar__icon {
     margin-bottom: 0;
   }
-  .global-sidebar__text {
+  .nav-sidebar__title {
     margin-left: 20px;
   }
 }
 
 // 浮动式
-.global-sidebar__fixed {
-  @extend .global-sidebar_public;
+.nav-sidebar__fixed {
   position: fixed;
   display: none;
   top: 0;
-  z-index: $sidebar_fixed_zindex;
-  .global-sidebar__ul {
+  z-index: $navSidebar_fixed_zIndex;
+  .nav-sidebar__ul {
     transition-property: left;
-    transition-duration: $sidebar_transition;
+    transition-duration: $navSidebar_transition;
     position: absolute;
     padding-top: 0;
     top: 0;
-    left: -$sidebar_w;
-    width: $sidebar_w;
-    z-index: $sidebar_ul_zindex;
+    left: -$navSidebar_w;
+    width: $navSidebar_w;
+    z-index: $navSidebar_ul_zIndex;
   }
-  .global-sidebar__item {
+  .nav-sidebar__item {
     height: 48px;
     padding-left: 20px;
     margin-bottom: 4px;
     flex-direction: row;
     justify-content: start;
     &:hover {
-      background-color: $sidebar_item_active_color;
+      background-color: $navSidebar_item_active_color;
     }
     &.global-active {
-      background-color: $sidebar_item_active_color;
+      background-color: $navSidebar_item_active_color;
     }
   }
-  .global-sidebar__icon {
+  .nav-sidebar__icon {
     margin-bottom: 0;
   }
-  .global-sidebar__text {
+  .nav-sidebar__title {
     margin-left: 20px;
   }
 }
-.global-sidebar__shade {
+.nav-sidebar__shade {
   transition-property: opacity;
-  transition-duration: $sidebar_transition;
+  transition-duration: $navSidebar_transition;
   position: fixed;
   left: 0;
   top: 0;
@@ -220,37 +215,36 @@ $sidebar_shade_zindex: 1; // 内容为 t + 1
   height: 100vh;
   background-color: rgba($color: #000000, $alpha: 0.3);
   opacity: 0;
-  z-index: $sidebar_shade_zindex;
+  z-index: $navSidebar_shade_zIndex;
 }
-
-.global-sidebar__logo {
-  height: $sidebar_logo_h;
+.nav-sidebar__logo {
+  height: $navSidebar_logo_h;
   margin-bottom: 10px;
 }
 
 // 浮动式-off
-.sidebar-hidden {
-  .global-sidebar__ul {
-    left: -$sidebar_w;
+.nav_sidebar-hidden {
+  .nav-sidebar__ul {
+    left: -$navSidebar_w;
   }
-  .global-sidebar__shade {
+  .nav-sidebar__shade {
     opacity: 0;
   }
 }
 
 //浮动式-on
 .sidebar-show {
-  .global-sidebar__ul {
+  .nav-sidebar__ul {
     left: 0;
   }
-  .global-sidebar__shade {
+  .nav-sidebar__shade {
     opacity: 1;
   }
 }
 
 // disabled 隐藏显示逻辑
-.global-sidebar[disabled] {
-  .global-sidebar__inset {
+.nav-sidebar[disabled] {
+  .nav-sidebar__inset {
     display: none;
   }
   & + .global-main {
@@ -258,21 +252,21 @@ $sidebar_shade_zindex: 1; // 内容为 t + 1
   }
 }
 
-.global-sidebar {
+.nav-sidebar {
   & + .global-main {
-    padding-left: $sidebar_w;
+    padding-left: $navSidebar_w;
   }
 }
 
 //媒体查询，宽度过小则自动隐藏
 @media (max-width: $narrow_w) {
-  .global-sidebar__inset {
-    width: $sidebar_s_w;
+  .nav-sidebar__inset {
+    width: $navSidebar_s_w;
   }
 }
 @media (max-width: $hidden_w) {
-  .global-sidebar {
-    .global-sidebar__inset {
+  .nav-sidebar {
+    .nav-sidebar__inset {
       display: none;
     }
     & + .global-main {
