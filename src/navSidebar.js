@@ -186,24 +186,24 @@ function globalnavSidebarSwitch() {
 }
 
 // $(function(){
-navSidebarInitialize();
-function navSidebarInitialize() {
-  var navSidebarInitialize_main = function main() {
-    var winW = document.body.clientWidth;
-    var window_w = 1320; //宽窄模式自动切换临界点
-    var method = navSidebarMethod(null);
-    if (!global_navSidebar_inset) {
-      return;
-    }
-    if (winW - window_w > 0) {
-      method.inset_on();
-      method.htmlOn();
-    } else {
-      method.inset_off();
-      method.htmlOff();
-    }
-  };
-  navSidebarInitialize_main();
-  window.onresize = navSidebarInitialize_main;
-}
+// navSidebarInitialize();
+// function navSidebarInitialize() {
+//   var navSidebarInitialize_main = function main() {
+//     var winW = document.body.clientWidth;
+//     var window_w = 1320; //宽窄模式自动切换临界点
+//     var method = navSidebarMethod(null);
+//     if (!global_navSidebar_inset) {
+//       return;
+//     }
+//     if (winW - window_w > 0) {
+//       method.inset_on();
+//       method.htmlOn();
+//     } else {
+//       method.inset_off();
+//       method.htmlOff();
+//     }
+//   };
+//   navSidebarInitialize_main();
+//   window.onresize = navSidebarInitialize_main;
+// }
 // })

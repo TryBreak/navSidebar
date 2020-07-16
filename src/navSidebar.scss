@@ -94,6 +94,23 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
   background-color: $navSidebar_bg_color;
 }
 
+.nav-sidebar__icon {
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  color: $navSidebar_icon_color;
+  fill: $navSidebar_icon_color;
+  margin-bottom: 8px;
+  font-size: 24px !important;
+}
+
+.nav-sidebar__title {
+  font-size: 16px;
+  color: $navSidebar_text_color;
+  margin-left: 0;
+}
+
 .nav-sidebar__item {
   height: $navSidebar_logo_h + 10;
   margin-bottom: 10px;
@@ -124,29 +141,12 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
   }
 }
 
-.nav-sidebar__icon {
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  line-height: 24px;
-  color: $navSidebar_icon_color;
-  fill: $navSidebar_icon_color;
-  margin-bottom: 8px;
-  font-size: 24px !important;
-}
-
-.nav-sidebar__title {
-  font-size: 16px;
-  color: $navSidebar_text_color;
-  margin-left: 0;
-}
-
 // 嵌入式-off
 .nav-sidebar__inset.nav_sidebar-narrow {
   width: $navSidebar_s_w;
 }
 // 嵌入式-on
-.nav-sidebar__inset.nav_sidebar-narrow {
+.nav-sidebar__inset.nav_sidebar-wide {
   width: $navSidebar_w;
   .nav-sidebar__item {
     height: 48px;
@@ -157,7 +157,7 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
     &:hover {
       background-color: $navSidebar_item_active_color;
     }
-    &.global-active {
+    &.nav-sidebar__item-active {
       background-color: $navSidebar_item_active_color;
     }
   }
@@ -242,19 +242,19 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
   }
 }
 
-// disabled 隐藏显示逻辑
-.nav-sidebar[disabled] {
+// nav-sidebar-inset-hidden 隐藏侧边栏逻辑
+.nav-sidebar[nav-sidebar-inset-hidden] {
   .nav-sidebar__inset {
     display: none;
   }
-  & + .global-main {
+  & + .nav-sidebar-main {
     padding-left: 0;
   }
 }
 
 .nav-sidebar {
-  & + .global-main {
-    padding-left: $navSidebar_w;
+  & + .nav-sidebar-main {
+    padding-left: $navSidebar_s_w;
   }
 }
 
@@ -269,7 +269,7 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
     .nav-sidebar__inset {
       display: none;
     }
-    & + .global-main {
+    & + .nav-sidebar-main {
       padding-left: 0;
     }
   }
