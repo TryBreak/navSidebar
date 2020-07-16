@@ -1,41 +1,5 @@
 //本次切换状态存储：
-var global_sidebar_inset = true; //true 为展开 ，false 为关闭
-
-function globalSidebarSwitch() {
-  var winW = document.body.clientWidth;
-  var window_w = 1320; //宽窄模式自动切换临界点
-  if (winW - window_w > 0) {
-    sidebarMethod("inset", function (param) {
-      global_sidebar_inset = param.inset;
-    });
-  } else {
-    sidebarMethod("fixed");
-  }
-  // 默认嵌入式展开收起
-  // 如果宽度小于 1320 , 则默认为浮动式
-  // 如果不存在嵌入式，则为浮动式展开收起
-}
-
-sidebarInitialize();
-function sidebarInitialize() {
-  var sidebarInitialize_main = function main() {
-    var winW = document.body.clientWidth;
-    var window_w = 1320; //宽窄模式自动切换临界点
-    var method = sidebarMethod(null);
-    if (!global_sidebar_inset) {
-      return;
-    }
-    if (winW - window_w > 0) {
-      method.inset_on();
-      method.htmlOn();
-    } else {
-      method.inset_off();
-      method.htmlOff();
-    }
-  };
-  sidebarInitialize_main();
-  window.onresize = sidebarInitialize_main;
-}
+window.global_sidebar_inset = true; //true 为展开 ，false 为关闭
 
 function sidebarMethod(status_str, callback) {
   /*
@@ -205,3 +169,41 @@ function sidebarMethod(status_str, callback) {
     return param;
   }
 }
+
+function globalSidebarSwitch() {
+  var winW = document.body.clientWidth;
+  var window_w = 1320; //宽窄模式自动切换临界点
+  if (winW - window_w > 0) {
+    sidebarMethod("inset", function (param) {
+      global_sidebar_inset = param.inset;
+    });
+  } else {
+    sidebarMethod("fixed");
+  }
+  // 默认嵌入式展开收起
+  // 如果宽度小于 1320 , 则默认为浮动式
+  // 如果不存在嵌入式，则为浮动式展开收起
+}
+
+// $(function(){
+sidebarInitialize();
+function sidebarInitialize() {
+  var sidebarInitialize_main = function main() {
+    var winW = document.body.clientWidth;
+    var window_w = 1320; //宽窄模式自动切换临界点
+    var method = sidebarMethod(null);
+    if (!global_sidebar_inset) {
+      return;
+    }
+    if (winW - window_w > 0) {
+      method.inset_on();
+      method.htmlOn();
+    } else {
+      method.inset_off();
+      method.htmlOff();
+    }
+  };
+  sidebarInitialize_main();
+  window.onresize = sidebarInitialize_main;
+}
+// })

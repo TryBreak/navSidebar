@@ -66,11 +66,12 @@ $sidebar_transition: 0.2s;
 $narrow_w: 1320px;
 $hidden_w: 800px;
 
-//假设顶栏层级为 7000
-$sidebar_inset_zindex: 6999; // 嵌入式为
-$sidebar_fixed_zindex: 7001;
-$sidebar_ul_zindex: 7002;
-$sidebar_shade_zindex: 7001;
+//假设顶栏层级为 t = 7000 变量为 $zIndex-navbar--fixed
+$zIndex-navbar--fixed: 300;
+$sidebar_inset_zindex: $zIndex-navbar--fixed - 1; // 嵌入式为 t - 1
+$sidebar_fixed_zindex: $zIndex-navbar--fixed + 1; // 浮动式为 t + 1
+$sidebar_ul_zindex: 2; // 内容为 t + 2
+$sidebar_shade_zindex: 1; // 内容为 t + 1
 
 .global-sidebar_public {
   left: 0;
@@ -104,7 +105,9 @@ $sidebar_shade_zindex: 7001;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
   &:hover {
+    text-decoration: none;
     cursor: pointer;
     .global-sidebar__icon {
       color: $sidebar_icon_active_color;
@@ -128,9 +131,12 @@ $sidebar_shade_zindex: 7001;
 .global-sidebar__icon {
   width: 24px;
   height: 24px;
+  text-align: center;
+  line-height: 24px;
   color: $sidebar_icon_color;
   fill: $sidebar_icon_color;
   margin-bottom: 8px;
+  font-size: 24px !important;
 }
 
 .global-sidebar__text {
@@ -254,7 +260,7 @@ $sidebar_shade_zindex: 7001;
 
 .global-sidebar {
   & + .global-main {
-    padding-left: $sidebar_s_w;
+    padding-left: $sidebar_w;
   }
 }
 
