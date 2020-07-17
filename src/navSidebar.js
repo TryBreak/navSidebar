@@ -59,7 +59,6 @@ function navSidebarMethod(status_str, callback) {
     },
     readStatus: function () {
       //开关状态不再根据类名读取，根据宽度读取
-      console.log("111", this.isInsetOn);
       if (this.isInsetDisabled) {
         // Disabled
       } else {
@@ -80,10 +79,13 @@ function navSidebarMethod(status_str, callback) {
       );
 
       //浮动式默认为关闭状态
+      if (fixedOn) {
+        this.isFixedOn = true;
+      } else {
+        this.isFixedOn = false;
+      }
       if (fixedOff && fixedOn) {
         this.isFixedOn = false;
-      } else {
-        this.isFixedOn = true;
       }
 
       return {
@@ -115,21 +117,23 @@ function navSidebarMethod(status_str, callback) {
       return this.inform();
     },
     fixed_off: function () {
+      var _this = this;
       this.fixedElm.classList.remove(this.status_list_class.fixed_on);
       this.fixedElm.classList.add(this.status_list_class.fixed_off);
       setTimeout(function () {
-        this.fixedElm.style.display = "none";
-        this.inform();
+        _this.fixedElm.style.display = "none";
+        _this.inform();
       }, this.transitionTime);
       return "fixed_off";
     },
     fixed_on: function () {
+      var _this = this;
       this.fixedElm.style.display = "block";
       setTimeout(function () {
-        this.fixedElm.classList.remove(this.status_list_class.fixed_off);
-        this.fixedElm.classList.add(this.status_list_class.fixed_on);
-        this.inform();
-      });
+        _this.fixedElm.classList.remove(_this.status_list_class.fixed_off);
+        _this.fixedElm.classList.add(_this.status_list_class.fixed_on);
+        _this.inform();
+      }, 100);
       return "fixed_on";
     },
     mainOn: function () {
@@ -150,7 +154,7 @@ function navSidebarMethod(status_str, callback) {
         inset: this.isInsetOn,
       };
       callback && callback(param);
-      console.log(param);
+      console.log("通知结果", param);
       return param;
     },
   };
