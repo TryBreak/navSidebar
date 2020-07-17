@@ -76,75 +76,6 @@ $navSidebar_ul_zIndex: 2; // 内容为 t + 2
 $navSidebar_shade_zIndex: 1; // 内容为 t + 1
 
 // 基础样式
-.nav-sidebar__inset {
-  position: fixed;
-  display: block;
-  top: 0px;
-  left: 0px;
-  height: 100vh;
-  width: $navSidebar_s_w;
-  z-index: $navSidebar_inset_zIndex;
-}
-
-.nav-sidebar__ul {
-  height: 100vh;
-  box-sizing: border-box;
-  padding-top: $navSidebar_logo_h + 10;
-  overflow-y: scroll;
-  background-color: $navSidebar_bg_color;
-}
-
-.nav-sidebar__icon {
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  line-height: 24px;
-  color: $navSidebar_icon_color;
-  fill: $navSidebar_icon_color;
-  margin-bottom: 8px;
-  font-size: 24px !important;
-}
-
-.nav-sidebar__title {
-  font-size: 16px;
-  color: $navSidebar_text_color;
-  margin-left: 0;
-}
-
-.nav-sidebar__item {
-  height: $navSidebar_logo_h + 10;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  &:hover {
-    text-decoration: none;
-    cursor: pointer;
-    .nav-sidebar__icon {
-      color: $navSidebar_icon_active_color;
-      fill: $navSidebar_icon_active_color;
-    }
-    .nav-sidebar__title {
-      color: $navSidebar_text_active_color;
-    }
-  }
-  &.nav-sidebar__item-active {
-    .nav-sidebar__icon {
-      color: $navSidebar_icon_active_color;
-      fill: $navSidebar_icon_active_color;
-    }
-    .nav-sidebar__title {
-      color: $navSidebar_text_active_color;
-    }
-  }
-}
-
-// 嵌入式 - 窄
-.nav-sidebar__inset.nav_sidebar-narrow {
-  width: $navSidebar_s_w;
-}
 // 嵌入式 - 宽
 @mixin nav-sidebar__inset($calss) {
   .nav-sidebar__inset#{$calss} {
@@ -170,83 +101,159 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
     }
   }
 }
-@include nav-sidebar__inset(".nav_sidebar-wide");
 
-// 浮动式
-.nav-sidebar__fixed {
-  position: fixed;
-  display: none;
-  top: 0;
-  z-index: $navSidebar_fixed_zIndex;
+.js-nav-sidebar,
+.nav-sidebar {
+  .nav-sidebar__inset {
+    position: fixed;
+    display: block;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: $navSidebar_s_w;
+    z-index: $navSidebar_inset_zIndex;
+  }
+
   .nav-sidebar__ul {
-    transition-property: left;
-    transition-duration: $navSidebar_transition;
-    position: absolute;
-    padding-top: 0;
-    top: 0;
-    left: -$navSidebar_w;
-    width: $navSidebar_w;
-    z-index: $navSidebar_ul_zIndex;
+    height: 100vh;
+    box-sizing: border-box;
+    padding-top: $navSidebar_logo_h + 10;
+    overflow-y: scroll;
+    background-color: $navSidebar_bg_color;
   }
-  .nav-sidebar__item {
-    height: 48px;
-    padding-left: 20px;
-    margin-bottom: 4px;
-    flex-direction: row;
-    justify-content: start;
-    &:hover {
-      background-color: $navSidebar_item_active_color;
-    }
-    &.global-active {
-      background-color: $navSidebar_item_active_color;
-    }
-  }
+
   .nav-sidebar__icon {
-    margin-bottom: 0;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    color: $navSidebar_icon_color;
+    fill: $navSidebar_icon_color;
+    margin-bottom: 8px;
+    font-size: 24px !important;
   }
+
   .nav-sidebar__title {
-    margin-left: 20px;
+    font-size: 16px;
+    color: $navSidebar_text_color;
+    margin-left: 0;
   }
-}
-.nav-sidebar__shade {
-  transition-property: opacity;
-  transition-duration: $navSidebar_transition;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba($color: #000000, $alpha: 0.3);
-  opacity: 0;
-  z-index: $navSidebar_shade_zIndex;
-}
-.nav-sidebar__logo {
-  height: $navSidebar_logo_h;
-  margin-bottom: 10px;
-}
 
-// 浮动式-off
-.nav_sidebar-hidden {
-  .nav-sidebar__ul {
-    left: -$navSidebar_w;
+  .nav-sidebar__item {
+    height: $navSidebar_logo_h + 10;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
+      .nav-sidebar__icon {
+        color: $navSidebar_icon_active_color;
+        fill: $navSidebar_icon_active_color;
+      }
+      .nav-sidebar__title {
+        color: $navSidebar_text_active_color;
+      }
+    }
+    &.nav-sidebar__item-active {
+      .nav-sidebar__icon {
+        color: $navSidebar_icon_active_color;
+        fill: $navSidebar_icon_active_color;
+      }
+      .nav-sidebar__title {
+        color: $navSidebar_text_active_color;
+      }
+    }
+  }
+
+  // 嵌入式 - 窄
+  .nav-sidebar__inset.nav_sidebar-narrow {
+    width: $navSidebar_s_w;
+  }
+
+  @include nav-sidebar__inset(".nav_sidebar-wide");
+
+  // 浮动式
+  .nav-sidebar__fixed {
+    position: fixed;
+    display: none;
+    top: 0;
+    z-index: $navSidebar_fixed_zIndex;
+    .nav-sidebar__ul {
+      transition-property: left;
+      transition-duration: $navSidebar_transition;
+      position: absolute;
+      padding-top: 0;
+      top: 0;
+      left: -$navSidebar_w;
+      width: $navSidebar_w;
+      z-index: $navSidebar_ul_zIndex;
+    }
+    .nav-sidebar__item {
+      height: 48px;
+      padding-left: 20px;
+      margin-bottom: 4px;
+      flex-direction: row;
+      justify-content: start;
+      &:hover {
+        background-color: $navSidebar_item_active_color;
+      }
+      &.global-active {
+        background-color: $navSidebar_item_active_color;
+      }
+    }
+    .nav-sidebar__icon {
+      margin-bottom: 0;
+    }
+    .nav-sidebar__title {
+      margin-left: 20px;
+    }
   }
   .nav-sidebar__shade {
-    opacity: 0;
-  }
-}
-
-//浮动式-on
-.nav_sidebar-show {
-  .nav-sidebar__ul {
+    transition-property: opacity;
+    transition-duration: $navSidebar_transition;
+    position: fixed;
     left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+    opacity: 0;
+    z-index: $navSidebar_shade_zIndex;
   }
-  .nav-sidebar__shade {
-    opacity: 1;
+  .nav-sidebar__logo {
+    height: $navSidebar_logo_h;
+    margin-bottom: 10px;
+  }
+
+  // 浮动式-off
+  .nav_sidebar-hidden {
+    .nav-sidebar__ul {
+      left: -$navSidebar_w;
+    }
+    .nav-sidebar__shade {
+      opacity: 0;
+    }
+  }
+
+  //浮动式-on
+  .nav_sidebar-show {
+    .nav-sidebar__ul {
+      left: 0;
+    }
+    .nav-sidebar__shade {
+      opacity: 1;
+    }
   }
 }
 
 // nav-sidebar-inset-hidden 隐藏侧边栏逻辑
-.nav-sidebar[nav-sidebar-inset-hidden] {
+
+.nav-sidebar[nav-sidebar-inset-hidden],
+.js-nav-sidebar[nav-sidebar-inset-hidden] {
   .nav-sidebar__inset {
     display: none;
   }
@@ -255,7 +262,8 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
   }
 }
 
-.nav-sidebar {
+.nav-sidebar,
+.js-nav-sidebar {
   + .nav-sidebar-main {
     padding-left: $navSidebar_s_w;
   }

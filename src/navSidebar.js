@@ -35,10 +35,7 @@ function navSidebarMethod(status_str, callback) {
   var isFixedOn;
 
   var utils = {
-    findKey: function (obj, value, compare = (a, b) => a === b) {
-      return Object.keys(obj).find((k) => compare(obj[k], value));
-    },
-    readType: function (params) {
+    readType: function () {
       if (status_str === sidebarTypeList[0]) {
         type = sidebarTypeList[0];
       }
@@ -49,24 +46,27 @@ function navSidebarMethod(status_str, callback) {
       return type;
     },
     getElm: function () {
-      insetElm = document.getElementById("js-nav-navSidebar-inset");
-      fixedElm = document.getElementById("js-nav-navSidebar-fixed");
+      insetElm = document.getElementById("js-nav-sidebar-inset");
+      fixedElm = document.getElementById("js-nav-sidebar-fixed");
       insetElmStyle = window.getComputedStyle(insetElm);
       isInsetDisabled = insetElmStyle.display === "none";
-
       return {
         fixedElm: fixedElm,
         insetElm: insetElm,
       };
     },
     readStatus: function () {
-      if (insetElm) {
-        isInsetOff = !insetElm.classList.contains(status_list_class.inset_on);
-        isInsetOn = !insetElm.classList.contains(status_list_class.inset_off);
-        //嵌入式默认为关闭状态
-        if (isInsetOff && isInsetOn) {
-          isInsetOn = false;
+      //开关状态不再根据类名读取，根据宽度读取
+      if (isInsetDisabled) {
+        // Disabled
+      } else {
+        console.log("显示");
+        var insetElmStyle = window.getComputedStyle(insetElm);
+        var insetWidth = parseInt(insetElmStyle.width);
+        if (insetWidth > navSidebar_s_w) {
+          isInsetOn = true;
         }
+        isInsetOff = !isInsetOn;
       }
 
       isFixedOff = !fixedElm.classList.contains(status_list_class.fixed_on);
@@ -116,14 +116,14 @@ function navSidebarMethod(status_str, callback) {
       return "fixed_on";
     },
     htmlOn: function () {
-      var htmlElm = document.getElementById("global-main");
-      htmlElm.style.paddingLeft = navSidebar_w + "px";
-      return htmlElm.style.paddingLeft;
+      var mainElm = document.getElementById("js-nav-sidebar-main");
+      mainElm.style.paddingLeft = navSidebar_w + "px";
+      return mainElm.style.paddingLeft;
     },
     htmlOff: function () {
-      var htmlElm = document.getElementById("global-main");
-      htmlElm.style.paddingLeft = navSidebar_s_w + "px";
-      return htmlElm.style.paddingLeft;
+      var mainElm = document.getElementById("js-nav-sidebar-main");
+      mainElm.style.paddingLeft = navSidebar_s_w + "px";
+      return mainElm.style.paddingLeft;
     },
   };
 
