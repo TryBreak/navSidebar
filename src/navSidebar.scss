@@ -260,8 +260,44 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
 
 //媒体查询，宽度过小则自动隐藏
 @media (max-width: $narrow_w) {
-  .nav-sidebar__inset {
-    width: $navSidebar_s_w;
+  // 窄
+  .nav-sidebar {
+    .nav-sidebar__inset {
+      width: $navSidebar_s_w;
+    }
+  }
+}
+@media (min-width: $narrow_w) {
+  // 宽
+  .nav-sidebar {
+    .nav-sidebar__inset {
+      width: $navSidebar_w;
+    }
+    & + .nav-sidebar-main {
+      padding-left: $navSidebar_w;
+    }
+    .nav-sidebar__inset {
+      width: $navSidebar_w;
+      .nav-sidebar__item {
+        height: 48px;
+        padding-left: 20px;
+        margin-bottom: 4px;
+        flex-direction: row;
+        justify-content: start;
+        &:hover {
+          background-color: $navSidebar_item_active_color;
+        }
+        &.nav-sidebar__item-active {
+          background-color: $navSidebar_item_active_color;
+        }
+      }
+      .nav-sidebar__icon {
+        margin-bottom: 0;
+      }
+      .nav-sidebar__title {
+        margin-left: 20px;
+      }
+    }
   }
 }
 @media (max-width: $hidden_w) {
