@@ -141,33 +141,36 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
   }
 }
 
-// 嵌入式-off
+// 嵌入式 - 窄
 .nav-sidebar__inset.nav_sidebar-narrow {
   width: $navSidebar_s_w;
 }
-// 嵌入式-on
-.nav-sidebar__inset.nav_sidebar-wide {
-  width: $navSidebar_w;
-  .nav-sidebar__item {
-    height: 48px;
-    padding-left: 20px;
-    margin-bottom: 4px;
-    flex-direction: row;
-    justify-content: start;
-    &:hover {
-      background-color: $navSidebar_item_active_color;
+// 嵌入式 - 宽
+@mixin nav-sidebar__inset($calss) {
+  .nav-sidebar__inset#{$calss} {
+    width: $navSidebar_w;
+    .nav-sidebar__item {
+      height: 48px;
+      padding-left: 20px;
+      margin-bottom: 4px;
+      flex-direction: row;
+      justify-content: start;
+      &:hover {
+        background-color: $navSidebar_item_active_color;
+      }
+      &.nav-sidebar__item-active {
+        background-color: $navSidebar_item_active_color;
+      }
     }
-    &.nav-sidebar__item-active {
-      background-color: $navSidebar_item_active_color;
+    .nav-sidebar__icon {
+      margin-bottom: 0;
     }
-  }
-  .nav-sidebar__icon {
-    margin-bottom: 0;
-  }
-  .nav-sidebar__title {
-    margin-left: 20px;
+    .nav-sidebar__title {
+      margin-left: 20px;
+    }
   }
 }
+@include nav-sidebar__inset(".nav_sidebar-wide");
 
 // 浮动式
 .nav-sidebar__fixed {
@@ -247,18 +250,18 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
   .nav-sidebar__inset {
     display: none;
   }
-  & + .nav-sidebar-main {
+  + .nav-sidebar-main {
     padding-left: 0;
   }
 }
 
 .nav-sidebar {
-  & + .nav-sidebar-main {
+  + .nav-sidebar-main {
     padding-left: $navSidebar_s_w;
   }
 }
 
-//媒体查询，宽度过小则自动隐藏
+// //媒体查询，宽度过小则自动隐藏
 @media (max-width: $narrow_w) {
   // 窄
   .nav-sidebar {
@@ -270,33 +273,9 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
 @media (min-width: $narrow_w) {
   // 宽
   .nav-sidebar {
-    .nav-sidebar__inset {
-      width: $navSidebar_w;
-    }
-    & + .nav-sidebar-main {
+    @include nav-sidebar__inset("");
+    + .nav-sidebar-main {
       padding-left: $navSidebar_w;
-    }
-    .nav-sidebar__inset {
-      width: $navSidebar_w;
-      .nav-sidebar__item {
-        height: 48px;
-        padding-left: 20px;
-        margin-bottom: 4px;
-        flex-direction: row;
-        justify-content: start;
-        &:hover {
-          background-color: $navSidebar_item_active_color;
-        }
-        &.nav-sidebar__item-active {
-          background-color: $navSidebar_item_active_color;
-        }
-      }
-      .nav-sidebar__icon {
-        margin-bottom: 0;
-      }
-      .nav-sidebar__title {
-        margin-left: 20px;
-      }
     }
   }
 }
@@ -305,7 +284,7 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
     .nav-sidebar__inset {
       display: none;
     }
-    & + .nav-sidebar-main {
+    + .nav-sidebar-main {
       padding-left: 0;
     }
   }
