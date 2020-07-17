@@ -19,6 +19,8 @@ function navSidebarMethod(status_str, callback) {
     inset_on: "nav_sidebar-wide",
     fixed_off: "nav_sidebar-hidden",
     fixed_on: "nav_sidebar-show",
+    boxCSSMedia: "nav-sidebar",
+    boxJSMedia: "js-nav-sidebar",
   };
 
   var transitionTime = 200;
@@ -81,10 +83,16 @@ function navSidebarMethod(status_str, callback) {
         isFixedOn: isFixedOn,
       };
     },
+    disabledCSSMedia: function () {
+      var boxElm = document.getElementById("js-nav-sidebar");
+      boxElm.classList.remove(status_list_class.boxCSSMedia);
+      boxElm.classList.add(status_list_class.boxJSMedia);
+    },
     inset_off: function () {
       if (!insetElm) {
         return null;
       }
+      this.disabledCSSMedia();
       insetElm.classList.remove(status_list_class.inset_on);
       insetElm.classList.add(status_list_class.inset_off);
       return inform();
@@ -93,6 +101,7 @@ function navSidebarMethod(status_str, callback) {
       if (!insetElm) {
         return null;
       }
+      this.disabledCSSMedia();
       insetElm.classList.remove(status_list_class.inset_off);
       insetElm.classList.add(status_list_class.inset_on);
       return inform();
