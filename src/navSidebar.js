@@ -1,6 +1,4 @@
 //本次切换状态存储：
-//true 为宽模式和js未掌控状态 ，false 为窄模式和js已掌控状态
-window.navSidebarControlState = true;
 
 function navSidebarMethod(status_str, callback) {
   /*
@@ -197,9 +195,7 @@ function navSidebarSwitch() {
   var winW = document.body.clientWidth;
   var window_w = 1320; //宽窄模式自动切换临界点
   if (winW - window_w > 0) {
-    navSidebarMethod("inset", function (param) {
-      global_navSidebar_inset = param.inset;
-    });
+    navSidebarMethod("inset");
   } else {
     navSidebarMethod("fixed");
   }
@@ -212,6 +208,20 @@ function navSidebarInitialize() {
     var winW = document.body.clientWidth;
     var window_w = 1320; //宽窄模式自动切换临界点
     var method = navSidebarMethod(null);
+    method.getElm();
+    // 这里需要保留一下手动操作过的痕迹
+    var isInsetOn = method.readStatus().isInsetOn;
+    if (winW < window_w) {
+      if (isInsetOn) {
+        method.inset_off();
+        method.mainOff();
+      }
+    } else {
+      if (!isInsetOn) {
+        method.inset_on();
+        method.mainOn();
+      }
+    }
   };
   window.onresize = function (params) {
     navSidebarInitialize_main();
