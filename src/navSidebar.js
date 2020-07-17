@@ -1,5 +1,6 @@
 //本次切换状态存储：
-window.global_navSidebar_inset = true; //true 为展开 ，false 为关闭
+//true 为宽模式和js未掌控状态 ，false 为窄模式和js已掌控状态
+window.navSidebarControlState = true;
 
 function navSidebarMethod(status_str, callback) {
   /*
@@ -10,7 +11,7 @@ function navSidebarMethod(status_str, callback) {
     })
   */
 
-  var outsideStatusList = ["inset", "fixed"];
+  var sidebarTypeList = ["inset", "fixed"];
 
   // 存在对应 class 则表示是对应状态 , 默认都不存在
   var status_list_class = {
@@ -38,11 +39,11 @@ function navSidebarMethod(status_str, callback) {
       return Object.keys(obj).find((k) => compare(obj[k], value));
     },
     readType: function (params) {
-      if (status_str === outsideStatusList[0]) {
-        type = outsideStatusList[0];
+      if (status_str === sidebarTypeList[0]) {
+        type = sidebarTypeList[0];
       }
-      if (status_str === outsideStatusList[1]) {
-        type = outsideStatusList[1];
+      if (status_str === sidebarTypeList[1]) {
+        type = sidebarTypeList[1];
       }
       this.getElm();
       return type;
@@ -134,10 +135,10 @@ function navSidebarMethod(status_str, callback) {
 
   // 执行切换
   if (isInsetDisabled) {
-    type = outsideStatusList[1];
+    type = sidebarTypeList[1];
   }
 
-  if (type === outsideStatusList[0]) {
+  if (type === sidebarTypeList[0]) {
     if (isInsetOff) {
       utils.inset_on();
       utils.htmlOn();
@@ -147,7 +148,7 @@ function navSidebarMethod(status_str, callback) {
     }
   }
 
-  if (type === outsideStatusList[1]) {
+  if (type === sidebarTypeList[1]) {
     if (isFixedOff) {
       utils.fixed_on();
     } else {
@@ -170,14 +171,17 @@ function navSidebarMethod(status_str, callback) {
   }
 }
 
-function globalnavSidebarSwitch() {
+// 切换开关
+function navSidebarSwitch() {
   var winW = document.body.clientWidth;
   var window_w = 1320; //宽窄模式自动切换临界点
   if (winW - window_w > 0) {
+    console.log("嵌入式切换开始");
     navSidebarMethod("inset", function (param) {
       global_navSidebar_inset = param.inset;
     });
   } else {
+    console.log("浮动式切换开始");
     navSidebarMethod("fixed");
   }
   // 默认嵌入式展开收起
