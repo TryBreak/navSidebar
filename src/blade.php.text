@@ -1,0 +1,15 @@
+@set($navSidebarItemList,app(\App\Libraries\ViewHelp::class)->navSidebarItemList())
+
+
+
+
+
+
+      @foreach ($navSidebarItemList as $item)
+        <li>
+          <a href="{{ $item['link'] }}" class="global-sidebar__item">
+            <i class="icon-font {{ $item['icon'] }} global-sidebar__icon"></i>
+            <span class="global-sidebar__text"> {{ $item['title'] }} </span>
+          </a>
+        </li>
+      @endforeach
