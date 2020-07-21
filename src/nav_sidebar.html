@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,shrink-to-fit=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="theme-color" content="#000000" />
+    <title>侧边导航栏</title>
+    <link rel="stylesheet" href="./nav_sidebar.min.css" />
+    <link rel="stylesheet" href="./nav_header.min.css" />
+    <style>
+      body {
+        background-color: beige;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- nav_header start -->
+    <div class="nav-header">
+      <div class="page-top flex-center" id="navbar">
+        <div class="page-top__left flex-center--y">
+          <button
+            class="page-top__menu-trigger menu-button"
+            onclick="tapNavBar.sidebarSwitch()"
+          >
+            <span class="menu-button__bar"></span>
+            <span class="menu-button__bar"></span>
+            <span class="menu-button__bar"></span>
+          </button>
+          <a
+            href="{{ action('App\HomeController@index') }}"
+            class="flex-center--y"
+          >
+            <span class="icon-font icon-logo page-top__logo"></span>
+          </a>
+          <a href="{{ action('App\HomeController@getMobile') }}">
+            <i class="taptap-icon icon-mobile-download"></i>
+          </a>
+        </div>
+        <div class="page-top__center">
+          <div class="page-top__search-box">
+            <!-- {{--submit已转移至search.js做统一location.href处理--}} -->
+            <form
+              class="navbar-form"
+              id="search"
+              role="search"
+              method="get"
+              action="{{ action('App\SearchController@getSearchApps') }}"
+            >
+              <div class="form-group">
+                <button
+                  type="submit"
+                  class="btn btn-default navbar-search-button"
+                >
+                  <i class="icon-font icon-search2"></i>
+                </button>
+                <input
+                  type="text"
+                  class="form-control js-emit search-input"
+                  tap-event="click:search.show,change:search.apps,keydown:search.keydown"
+                  autocomplete="off"
+                  id="search-kw"
+                  name="kw"
+                  value="{{ isset($kw) ? $kw : '' }}"
+                  placeholder="{{ trans('interface.word.search') }}..."
+                />
+              </div>
+              <!-- {{--iPad user-agent有mobile--}} @if(!browser('mobile'))
+              @include('components.search.box', ['hideSearchBar' => true])
+              @endif -->
+            </form>
+          </div>
+        </div>
+        <div class="page-top__right flex-center--y">
+          <div class="dropdown navbar-notice hide">
+            <!-- @include('components.notification.bell')
+            @include('components.notification.widget') -->
+          </div>
+          <div class="dropdown navbar-user">
+            <a
+              href="{{ action('Auth\AuthController@getLogin') }}"
+              class="dropdown-toggle page-top__avatar-wrap flex-center--y"
+              rel="nofollow"
+              data-toggle="dropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <div class="page-top__avatar-box">
+                <img
+                  class="page-top__avatar-img"
+                  src="https://img.tapimg.com/market/images/22f1196f825298281376608459bfa7fe.png"
+                  alt=""
+                />
+              </div>
+            </a>
+            <input
+              type="hidden"
+              value="{{ trans('interface.word.dashboard') }}"
+              id="dashboard"
+            />
+            <input
+              type="hidden"
+              value="{{ trans('interface.phrase.my_following') }}"
+              id="my_following"
+            />
+            <input
+              type="hidden"
+              value="{{ trans('interface.phrase.my_collections') }}"
+              id="my_collections"
+            />
+            <input
+              type="hidden"
+              value="{{ trans('interface.phrase.my_orders') }}"
+              id="my_orders"
+            />
+            <input
+              type="hidden"
+              value="{{ trans('campfire.word.title_2') }}"
+              id="campfire"
+            />
+            <input
+              type="hidden"
+              value="{{ trans('interface.phrase.browse_history') }}"
+              id="browse_history"
+            />
+            <input
+              type="hidden"
+              value="{{ trans('topic.phrase.my_draft') }}"
+              id="draft_box"
+            />
+            <input
+              type="hidden"
+              value="{{ trans('interface.phrase.developer_center') }}"
+              id="developer_center"
+            />
+            <input
+              type="hidden"
+              value="{{ trans('interface.word.logout') }}"
+              id="logout"
+            />
+            <input
+              type="hidden"
+              value="{{ trans('account.active.button') }}"
+              id="activate"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- nav_header  end -->
+
+    <!-- nav_sidebar  start -->
+    <!--  nav-sidebar-inset-hidden 属性可以完全隐藏嵌入式侧边栏 -->
+    <div class="nav-sidebar" id="js-nav-sidebar">
+      <div class="nav-sidebar__inset" id="js-nav-sidebar-inset">
+        <ul class="nav-sidebar__ul">
+          <li>
+            <a href="www.baidu.com" class="nav-sidebar__item">
+              <i class="icon-font xxx nav-sidebar__icon">x</i>
+              <span class="nav-sidebar__title"> 首页 </span>
+            </a>
+          </li>
+          <li>
+            <a href="www.baidu.com" class="nav-sidebar__item">
+              <i class="icon-font xxx nav-sidebar__icon">x</i>
+              <span class="nav-sidebar__title"> 首页 </span>
+            </a>
+          </li>
+          <li>
+            <a href="www.baidu.com" class="nav-sidebar__item">
+              <i class="icon-font xxx nav-sidebar__icon">x</i>
+              <span class="nav-sidebar__title"> 首页 </span>
+            </a>
+          </li>
+          <li>
+            <a href="www.baidu.com" class="nav-sidebar__item">
+              <i class="icon-font xxx nav-sidebar__icon">x</i>
+              <span class="nav-sidebar__title"> 首页 </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-sidebar__fixed" id="js-nav-sidebar-fixed">
+        <div
+          class="nav-sidebar__shade"
+          onclick="navSidebarMethod('fixed')"
+        ></div>
+        <ul class="nav-sidebar__ul">
+          <li class="nav-sidebar__logo">
+            <button onclick="navSidebarMethod('fixed')">
+              收起/展开
+            </button>
+          </li>
+          <li>
+            <a href="www.baidu.com" class="nav-sidebar__item">
+              <i class="icon-font xxx nav-sidebar__icon">x</i>
+              <span class="nav-sidebar__title"> 首页 </span>
+            </a>
+          </li>
+          <li>
+            <a href="www.baidu.com" class="nav-sidebar__item">
+              <i class="icon-font xxx nav-sidebar__icon">x</i>
+              <span class="nav-sidebar__title"> 首页 </span>
+            </a>
+          </li>
+          <li>
+            <a href="www.baidu.com" class="nav-sidebar__item">
+              <i class="icon-font xxx nav-sidebar__icon">x</i>
+              <span class="nav-sidebar__title"> 首页 </span>
+            </a>
+          </li>
+          <li>
+            <a href="www.baidu.com" class="nav-sidebar__item">
+              <i class="icon-font xxx nav-sidebar__icon">x</i>
+              <span class="nav-sidebar__title"> 首页 </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- nav_sidebar  end -->
+
+    <!-- nav_main start -->
+    <div class="nav-sidebar-main" id="js-nav-sidebar-main">
+      <img style="padding: 10px;" src="./img.png" alt="" srcset="" />
+      <img style="padding: 10px;" src="./img.png" alt="" srcset="" />
+    </div>
+    <!-- nav_main  end -->
+  </body>
+</html>
+<script src="./nav_sidebar.js"></script>
