@@ -2,7 +2,9 @@
 //true 为宽模式和js未掌控状态 ，false 为窄模式和js已掌控状态
 window.navSidebarControlState = true;
 
-function navSidebarMethod(status_str, callback) {
+window.tapNavBar = {};
+
+window.tapNavBar.sidebarMethod = function (status_str, callback) {
   /*
     @status_str:"inset" || "fixed"
     @callback:Function({
@@ -154,7 +156,6 @@ function navSidebarMethod(status_str, callback) {
         inset: this.isInsetOn,
       };
       callback && callback(param);
-      console.log("通知结果", param);
       return param;
     },
   };
@@ -190,28 +191,29 @@ function navSidebarMethod(status_str, callback) {
   }
 
   return utils;
-}
+};
 
 // 切换开关
-function navSidebarSwitch() {
+window.tapNavBar.sidebarSwitch = function () {
   var winW = document.body.clientWidth;
   var window_w = 1320; //宽窄模式自动切换临界点
   if (winW - window_w > 0) {
-    navSidebarMethod("inset", function (param) {
+    window.tapNavBar.sidebarMethod("inset", function (param) {
       window.navSidebarControlState = param.inset;
     });
   } else {
-    navSidebarMethod("fixed");
+    window.tapNavBar.sidebarMethod("fixed");
   }
-  // navSidebarInitialize();
-}
+  window.tapNavBar.sidebarInitialize();
+};
 
-function navSidebarInitialize() {
+window.tapNavBar.sidebarInitialize = function () {
+  window.removeEventListener("resize", resizeFun);
   var navSidebarInitialize_main = function () {
     var winW = document.body.clientWidth;
     var window_w = 1320; //宽窄模式自动切换临界点
 
-    var method = navSidebarMethod(null);
+    var method = window.tapNavBar.sidebarMethod(null);
     method.getElm();
     // 这里需要保留一下手动操作过的痕迹
     var isInsetOn = method.readStatus().isInsetOn;
@@ -227,10 +229,11 @@ function navSidebarInitialize() {
       }
     }
   };
-  window.onresize = function () {
+  window.addEventListener("resize", resizeFun, false);
+
+  function resizeFun() {
     if (window.navSidebarControlState) {
-      console.log("执行");
       navSidebarInitialize_main();
     }
-  };
-}
+  }
+};
