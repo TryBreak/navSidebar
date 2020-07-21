@@ -25,28 +25,28 @@
   <body>
     <!-- nav_header start -->
     <div class="nav-header">
-      <div class="page-top flex-center" id="navbar">
-        <div class="page-top__left flex-center--y">
-          <button
-            class="page-top__menu-trigger menu-button"
+      <div class="nav-header__flex-center">
+        <div class="nav-header__flex-center--y">
+          <div
+            class="nav-header__menu-trigger"
             onclick="tapNavBar.sidebarSwitch()"
           >
-            <span class="menu-button__bar"></span>
-            <span class="menu-button__bar"></span>
-            <span class="menu-button__bar"></span>
-          </button>
+            <i class="nav-header__menu-line"></i>
+            <i class="nav-header__menu-line"></i>
+            <i class="nav-header__menu-line"></i>
+          </div>
           <a
             href="{{ action('App\HomeController@index') }}"
-            class="flex-center--y"
+            class="nav-header__flex-center--y"
           >
-            <span class="icon-font icon-logo page-top__logo"></span>
+            <span class="icon-font icon-logo nav-header__logo"></span>
           </a>
           <a href="{{ action('App\HomeController@getMobile') }}">
             <i class="taptap-icon icon-mobile-download"></i>
           </a>
         </div>
-        <div class="page-top__center">
-          <div class="page-top__search-box">
+        <div class="nav-header__center">
+          <div class="nav-header__search-box">
             <!-- {{--submit已转移至search.js做统一location.href处理--}} -->
             <form
               class="navbar-form"
@@ -79,7 +79,7 @@
             </form>
           </div>
         </div>
-        <div class="page-top__right flex-center--y">
+        <div class="nav-header__right nav-header__flex-center--y">
           <div class="dropdown navbar-notice hide">
             <!-- @include('components.notification.bell')
             @include('components.notification.widget') -->
@@ -87,16 +87,16 @@
           <div class="dropdown navbar-user">
             <a
               href="{{ action('Auth\AuthController@getLogin') }}"
-              class="dropdown-toggle page-top__avatar-wrap flex-center--y"
+              class="dropdown-toggle nav-header__avatar-wrap nav-header__flex-center--y"
               rel="nofollow"
               data-toggle="dropdown"
               role="button"
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <div class="page-top__avatar-box">
+              <div class="nav-header__avatar-box">
                 <img
-                  class="page-top__avatar-img"
+                  class="nav-header__avatar-img"
                   src="https://img.tapimg.com/market/images/22f1196f825298281376608459bfa7fe.png"
                   alt=""
                 />

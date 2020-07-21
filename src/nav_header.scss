@@ -2,37 +2,32 @@ $mainColor: #14b9c8;
 $primaryBgTextColor: #fff;
 $zIndex-navbar--fixed: 300;
 
-.flex-center--y {
+.nav-header__flex-center--y {
   display: flex;
   align-items: center;
 }
 
-.flex-center {
+.nav-header__flex-center {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .nav-header {
-  height: 54px;
-  width: 100%;
-}
-
-.page-top {
   position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   height: 54px;
   z-index: $zIndex-navbar--fixed;
-  background: $mainColor;
+  background-color: $mainColor;
   padding: 7px 20px;
 
   a {
     text-decoration: none;
   }
 
-  .page-top__logo {
+  .nav-header__logo {
     font-size: 86px;
     margin: 0 20px;
     color: $primaryBgTextColor;
@@ -58,11 +53,11 @@ $zIndex-navbar--fixed: 300;
   }
 }
 
-.page-top__center {
+.nav-header__center {
   padding: 0 20px;
 }
 
-.page-top__menu-trigger {
+.nav-header__menu-trigger {
   position: relative;
   display: inline-block;
   text-align: center;
@@ -73,21 +68,19 @@ $zIndex-navbar--fixed: 300;
   border: none;
   border-radius: 50%;
   cursor: pointer;
-
-  .menu-button__bar {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: #fff;
-    border-radius: 1px;
-
-    &:not(:first-child) {
-      margin-top: 4px;
-    }
+}
+.nav-header__menu-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  border-radius: 1px;
+  &:not(:first-child) {
+    margin-top: 4px;
   }
 }
 
-.page-top__search-box {
+.nav-header__search-box {
   width: 500px;
   height: 32px;
   background: rgba(168, 248, 255, 0.34);
@@ -130,18 +123,20 @@ $zIndex-navbar--fixed: 300;
   }
 }
 
-.page-top .taptap-search {
-  width: 500px;
-  top: 54px;
+.nav-header {
+  .taptap-search {
+    width: 500px;
+    top: 54px;
+  }
 }
 
-.page-top__avatar-wrap {
+.nav-header__avatar-wrap {
   display: block;
   padding: 4px;
   margin-left: 20px;
 }
 
-.page-top__avatar-box {
+.nav-header__avatar-box {
   display: block;
   background: #fff;
   width: 34px;
@@ -150,7 +145,7 @@ $zIndex-navbar--fixed: 300;
   border-radius: 50%;
 }
 
-.page-top__avatar-img {
+.nav-header__avatar-img {
   border-radius: 50%;
   width: 100%;
   height: 100%;
