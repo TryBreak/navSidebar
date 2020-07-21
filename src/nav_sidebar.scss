@@ -21,38 +21,39 @@ textarea {
   margin: 0;
   padding: 0;
 }
-
-ul,
-li {
-  list-style: none;
-}
-
-div,
-a {
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-a:link,
-a:visited {
-  color: inherit;
-}
-
-a {
-  background-color: transparent;
-  text-decoration: none;
-}
-
-img {
-  border-style: none;
-}
-
-[hidden] {
-  display: none;
-}
-
 body {
   background-color: #f4f3f3;
+}
+
+.js-nav-sidebar,
+.nav-sidebar {
+  ul,
+  li {
+    list-style: none;
+  }
+
+  div,
+  a {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a:link,
+  a:visited {
+    color: inherit;
+  }
+  a {
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  [hidden] {
+    display: none;
+  }
+
+  img {
+    border-style: none;
+  }
 }
 
 /*

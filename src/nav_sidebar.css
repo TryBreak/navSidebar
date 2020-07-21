@@ -22,37 +22,46 @@ textarea {
   padding: 0;
 }
 
-ul,
-li {
+body {
+  background-color: #f4f3f3;
+}
+
+.js-nav-sidebar ul,
+.js-nav-sidebar li,
+.nav-sidebar ul,
+.nav-sidebar li {
   list-style: none;
 }
 
-div,
-a {
+.js-nav-sidebar div,
+.js-nav-sidebar a,
+.nav-sidebar div,
+.nav-sidebar a {
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-a:link,
-a:visited {
+.js-nav-sidebar a:link,
+.js-nav-sidebar a:visited,
+.nav-sidebar a:link,
+.nav-sidebar a:visited {
   color: inherit;
 }
 
-a {
+.js-nav-sidebar a,
+.nav-sidebar a {
   background-color: transparent;
   text-decoration: none;
 }
 
-img {
-  border-style: none;
-}
-
-[hidden] {
+.js-nav-sidebar [hidden],
+.nav-sidebar [hidden] {
   display: none;
 }
 
-body {
-  background-color: #f4f3f3;
+.js-nav-sidebar img,
+.nav-sidebar img {
+  border-style: none;
 }
 
 /*
