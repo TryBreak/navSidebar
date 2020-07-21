@@ -14,8 +14,8 @@
     <meta name="format-detection" content="telephone=no, email=no" />
     <meta name="theme-color" content="#000000" />
     <title>侧边导航栏</title>
-    <link rel="stylesheet" href="./nav_sidebar.min.css" />
     <link rel="stylesheet" href="./nav_header.min.css" />
+    <link rel="stylesheet" href="./nav_sidebar.min.css" />
     <style>
       body {
         background-color: beige;
@@ -193,11 +193,11 @@
       <div class="nav-sidebar__fixed" id="js-nav-sidebar-fixed">
         <div
           class="nav-sidebar__shade"
-          onclick="navSidebarMethod('fixed')"
+          onclick="tapNavBar.sidebarSwitch('fixed')"
         ></div>
         <ul class="nav-sidebar__ul">
           <li class="nav-sidebar__logo">
-            <button onclick="navSidebarMethod('fixed')">
+            <button onclick="tapNavBar.sidebarSwitch('fixed')">
               收起/展开
             </button>
           </li>
