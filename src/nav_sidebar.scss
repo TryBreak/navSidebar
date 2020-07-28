@@ -68,6 +68,7 @@ $navSidebar_w: 240px;
 $navSidebar_s_w: 72px;
 $navSidebar_logo_h: 54px;
 $navSidebar_item_active_color: #e8f8fa;
+$navSidebar_item_active_hover_color: #dcf5f7;
 $navSidebar_icon_active_color: #14b9c8;
 $navSidebar_text_active_color: #14b9c8;
 $navSidebar_transition: 0.2s;
@@ -75,7 +76,9 @@ $narrow_w: 1320px;
 $hidden_w: 800px;
 
 //假设顶栏层级为 t = 7000 变量为 $zIndex-navbar--fixed
-$zIndex-navbar--fixed: 300; // 全局变量
+$zIndex-navbar--fixed: 300;
+$mainColor: #14b9c8;
+
 $navSidebar_inset_zIndex: $zIndex-navbar--fixed - 1; // 嵌入式为 t - 1
 $navSidebar_fixed_zIndex: $zIndex-navbar--fixed + 1; // 浮动式为 t + 1
 $navSidebar_ul_zIndex: 2; // 内容为 t + 2
@@ -89,22 +92,25 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
 
     .nav-sidebar__item {
       height: 48px;
-      padding-left: 20px;
-      margin-bottom: 4px;
+      padding-left: 24px;
       flex-direction: row;
       justify-content: start;
 
       &:hover {
-        background-color: $navSidebar_item_active_color;
+        background-color: #f8f8f8;
       }
 
       &.nav-sidebar__item-active {
         background-color: $navSidebar_item_active_color;
+        &:hover {
+          background-color: $navSidebar_item_active_hover_color;
+        }
       }
     }
 
     .nav-sidebar__icon {
       margin-bottom: 0;
+      margin-top: -2px;
     }
 
     .nav-sidebar__title {
@@ -112,7 +118,17 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
     }
   }
 }
-
+@mixin nav-sidebar__title-small() {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  line-height: 17px;
+  color: #999;
+}
 .js-nav-sidebar,
 .nav-sidebar {
   .nav-sidebar__inset {
@@ -128,7 +144,7 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
   .nav-sidebar__ul {
     height: 100vh;
     box-sizing: border-box;
-    padding-top: $navSidebar_logo_h + 10;
+    padding-top: $navSidebar_logo_h;
     background-color: $navSidebar_bg_color;
   }
 
@@ -139,7 +155,7 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
     line-height: 24px;
     color: $navSidebar_icon_color;
     fill: $navSidebar_icon_color;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
     font-size: 24px !important;
   }
 
@@ -151,7 +167,6 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
 
   .nav-sidebar__item {
     height: $navSidebar_logo_h + 10;
-    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -161,15 +176,6 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
     &:hover {
       text-decoration: none;
       cursor: pointer;
-
-      .nav-sidebar__icon {
-        color: $navSidebar_icon_active_color;
-        fill: $navSidebar_icon_active_color;
-      }
-
-      .nav-sidebar__title {
-        color: $navSidebar_text_active_color;
-      }
     }
 
     &.nav-sidebar__item-active {
@@ -187,6 +193,23 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
   // 嵌入式 - 窄
   .nav-sidebar__inset.nav_sidebar-narrow {
     width: $navSidebar_s_w;
+    .nav-sidebar__item {
+      &:hover {
+        background: #f8f8f8;
+      }
+      &.nav-sidebar__item-active {
+        background: $navSidebar_item_active_color;
+        .nav-sidebar__title {
+          color: #14b9c8;
+        }
+        &:hover {
+          background-color: $navSidebar_item_active_hover_color;
+        }
+      }
+    }
+    .nav-sidebar__title {
+      @include nav-sidebar__title-small;
+    }
   }
 
   @include nav-sidebar__inset(".nav_sidebar-wide");
@@ -211,13 +234,12 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
 
     .nav-sidebar__item {
       height: 48px;
-      padding-left: 20px;
-      margin-bottom: 4px;
+      padding-left: 24px;
       flex-direction: row;
       justify-content: start;
 
       &:hover {
-        background-color: $navSidebar_item_active_color;
+        background-color: #f8f8f8;
       }
 
       &.global-active {
@@ -227,6 +249,7 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
 
     .nav-sidebar__icon {
       margin-bottom: 0;
+      margin-top: -2px;
     }
 
     .nav-sidebar__title {
@@ -249,7 +272,6 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
 
   .nav-sidebar__logo {
     height: $navSidebar_logo_h;
-    margin-bottom: 10px;
     border-bottom: 1px solid #eee;
   }
 
@@ -286,6 +308,7 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
 
   + .nav-sidebar-main {
     padding-left: 0;
+    padding-top: $navSidebar_logo_h;
   }
 }
 
@@ -293,6 +316,7 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
 .js-nav-sidebar {
   + .nav-sidebar-main {
     padding-left: $navSidebar_s_w;
+    padding-top: $navSidebar_logo_h + 20;
   }
 }
 
@@ -302,6 +326,21 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
   .nav-sidebar {
     .nav-sidebar__inset {
       width: $navSidebar_s_w;
+    }
+    .nav-sidebar__item {
+      &:hover {
+        background: #f8f8f8;
+      }
+      &.nav-sidebar__item-active {
+        background: $navSidebar_item_active_color;
+        color: #14b9c8;
+        &:hover {
+          background-color: $navSidebar_item_active_hover_color;
+        }
+      }
+    }
+    .nav-sidebar__title {
+      @include nav-sidebar__title-small;
     }
   }
 }
@@ -331,25 +370,21 @@ $navSidebar_shade_zIndex: 1; // 内容为 t + 1
 }
 
 // php 侧边下载app 按钮复用,覆盖样式
-.nav-sidebar {
-  .page-top {
-    background: #fff;
-    z-index: $navSidebar_ul_zIndex;
-    position: static;
-    left: auto;
-    right: auto;
+.nav-sidebar__logo {
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  box-sizing: border-box;
 
-    .page-top__menu-trigger .menu-button__bar {
-      background: #14b9c8;
-    }
-
-    .page-top__logo {
-      color: #14b9c8;
-    }
+  .nav-header__menu-line {
+    background: $mainColor;
   }
 
-  .nav-sidebar__down-icon {
-    font-size: 26px !important;
-    color: #14b9c8;
+  .nav-header__logo.icon-font {
+    color: $mainColor;
+  }
+
+  .nav-header__phone.icon-font {
+    color: $mainColor;
   }
 }
