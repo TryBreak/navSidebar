@@ -194,17 +194,21 @@ window.tapNavBar.sidebarMethod = function (status_str, callback) {
 };
 
 // 切换开关
-window.tapNavBar.sidebarSwitch = function () {
-  var winW = document.body.clientWidth;
-  var window_w = 1320; //宽窄模式自动切换临界点
-  if (winW - window_w > 0) {
-    window.tapNavBar.sidebarMethod("inset", function (param) {
-      window.navSidebarControlState = param.inset;
-    });
+window.tapNavBar.sidebarSwitch = function (param) {
+  if (param) {
+    window.tapNavBar.sidebarMethod(param);
   } else {
-    window.tapNavBar.sidebarMethod("fixed");
+    var winW = document.body.clientWidth;
+    var window_w = 1320; //宽窄模式自动切换临界点
+    if (winW - window_w > 0) {
+      window.tapNavBar.sidebarMethod("inset", function (param) {
+        window.navSidebarControlState = param.inset;
+      });
+    } else {
+      window.tapNavBar.sidebarMethod("fixed");
+    }
+    window.tapNavBar.sidebarInitialize();
   }
-  window.tapNavBar.sidebarInitialize();
 };
 
 window.tapNavBar.sidebarInitialize = function () {
